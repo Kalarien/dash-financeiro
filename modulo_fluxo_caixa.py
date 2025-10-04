@@ -255,9 +255,21 @@ def tab_projecoes():
 
             saldo_acumulado += resultado
 
+            # Nomes dos meses em português
+            meses_pt = {
+                'January': 'Janeiro', 'February': 'Fevereiro', 'March': 'Março',
+                'April': 'Abril', 'May': 'Maio', 'June': 'Junho',
+                'July': 'Julho', 'August': 'Agosto', 'September': 'Setembro',
+                'October': 'Outubro', 'November': 'Novembro', 'December': 'Dezembro'
+            }
+            mes_nome_en = mes.strftime('%B/%Y')
+            mes_nome_pt = mes_nome_en
+            for en, pt in meses_pt.items():
+                mes_nome_pt = mes_nome_pt.replace(en, pt)
+
             projecoes.append({
                 'mes': mes,
-                'mes_nome': mes.strftime('%B/%Y'),
+                'mes_nome': mes_nome_pt,
                 'receita': receita,
                 'custo': custo,
                 'despesa': despesa,
