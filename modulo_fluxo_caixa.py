@@ -200,7 +200,7 @@ def main_fluxo_caixa():
         st.warning("""
         **⏳ A Receber:**
         - Total a receber: R$ 300.586,56
-        - Principais: B2B (R$ 115k) e Asaas (R$ 180k)
+        - Principais: B2B (R$ 115.000) e Asaas (R$ 180.404)
         """)
 
 if __name__ == "__main__":
