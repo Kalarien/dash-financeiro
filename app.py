@@ -3000,300 +3000,175 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
     st.info("**Visão resumida**: Despesas agrupadas por categoria. Para ver itens individuais, acesse 'Matriz Realizada'.")
 
 def mostrar_matriz_realizada(df_despesas, df_receitas):
-    """Matriz detalhada com exibição completa das despesas individuais"""
-    
+    """Matriz da Matriz financeira.xlsx - junho a setembro/2025"""
+
     st.header("📊 Realizado")
-    
-    # Cria dados consolidados
-    dados_matriz = []
-    
-    # Header
-    meses = ['Jun/25', 'Jul/25', 'Ago/25', 'Set/25*']
-    
-    # RECEITAS
-    
-    # Receitas por status
-    for status in ['Realizado', 'Projetado']:
-        linha = [f'Receitas {status}', '']
-        total_status = 0
-        
-        for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
-            valor = df_receitas[
-                (df_receitas['Data'].dt.strftime('%Y-%m') == mes) & 
-                (df_receitas['Status'] == status)
-            ]['Valor'].sum()
-            linha.append(formatar_moeda_br(valor))
-            total_status += valor
-        
-        linha.append(formatar_moeda_br(total_status))
-        dados_matriz.append(linha)
-    
-    # Total receitas
-    linha_total_rec = ['TOTAL RECEITAS', '']
-    total_geral_rec = 0
-    for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
-        valor = df_receitas[df_receitas['Data'].dt.strftime('%Y-%m') == mes]['Valor'].sum()
-        linha_total_rec.append(formatar_moeda_br(valor))
-        total_geral_rec += valor
-    linha_total_rec.append(formatar_moeda_br(total_geral_rec))
-    dados_matriz.append(linha_total_rec)
-    
-    # Separador
-    dados_matriz.append(['', '', '', '', '', ''])
-    
-    # CUSTOS (Tarifas)
-    dados_matriz.append(['CUSTOS', '', '', '', '', ''])
-    
-    # Receitas brutas por mês para cálculo das tarifas
-    receitas_por_mes = {
-        '2025-06': 198198.40,  # Junho bruto
-        '2025-07': 433176.64,  # Julho bruto  
-        '2025-08': 146682.25,  # Agosto bruto
-        '2025-09': 22278.47    # Setembro bruto (realizado)
-    }
-    
-    # Tarifa de adquirente (2.5% sobre receitas - TODOS os meses)
-    linha_adquirente = ['Tarifa Adquirente (2.5%)', '']
-    total_adquirente = 0
-    
-    for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
-        if mes in receitas_por_mes:
-            tarifa = receitas_por_mes[mes] * 0.025
-            linha_adquirente.append(formatar_moeda_br(tarifa))
-            total_adquirente += tarifa
-        else:
-            linha_adquirente.append('-')
-    linha_adquirente.append(formatar_moeda_br(total_adquirente))
-    dados_matriz.append(linha_adquirente)
-    
-    # Tarifa de antecipação (3.33% apenas setembro em diante)
-    linha_antecipacao = ['Tarifa Antecipação (3.33%)', '']
-    total_antecipacao = 0
-    
-    tarifas_antecipacao = {
-        '2025-06': 0,           # Não teve
-        '2025-07': 0,           # Não teve
-        '2025-08': 0,           # Não teve
-        '2025-09': receitas_por_mes['2025-09'] * 0.0333  # Setembro: 3.33% sobre realizado
-    }
-    
-    for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
-        tarifa = tarifas_antecipacao.get(mes, 0)
-        if tarifa > 0:
-            linha_antecipacao.append(formatar_moeda_br(tarifa))
-            total_antecipacao += tarifa
-        else:
-            linha_antecipacao.append('-')
-    linha_antecipacao.append(formatar_moeda_br(total_antecipacao))
-    dados_matriz.append(linha_antecipacao)
-    
-    # Total custos (adquirente + antecipação)
-    linha_total_custos = ['TOTAL CUSTOS', '']
-    total_custos_geral = 0
-    
-    for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
-        # Adquirente todos os meses
-        custo_adquirente = receitas_por_mes.get(mes, 0) * 0.025
-        # Antecipação só setembro em diante
-        custo_antecipacao = tarifas_antecipacao.get(mes, 0)
-        
-        total_mes = custo_adquirente + custo_antecipacao
-        linha_total_custos.append(formatar_moeda_br(total_mes))
-        total_custos_geral += total_mes
-    
-    linha_total_custos.append(formatar_moeda_br(total_custos_geral))
-    dados_matriz.append(linha_total_custos)
-    
-    # Separador
-    dados_matriz.append(['', '', '', '', '', ''])
-    
-    # DESPESAS - Exibição completa como na exportação
-    dados_matriz.append(['DESPESAS', '', '', '', '', ''])
-    
-    # Ordena por categoria e depois por descrição para exibição organizada
-    categorias_ordenadas = ['ADS', 'Impostos', 'Juridico', 'Pro labore', 'Serviços', 'Sistemas']
-    
-    for categoria in categorias_ordenadas:
-        if categoria in df_despesas['Categoria'].values:
-            # Header da categoria
-            dados_matriz.append([f'📂 {categoria.upper()}', '', '', '', '', ''])
-            
-            # Itens individuais da categoria (apenas únicos)
-            descricoes_unicas = df_despesas[df_despesas['Categoria'] == categoria]['Descricao'].unique()
-            descricoes_unicas = sorted(descricoes_unicas)
-            
-            for descricao in descricoes_unicas:
-                # Pega status do primeiro registro dessa descrição
-                item_info = df_despesas[df_despesas['Descricao'] == descricao].iloc[0]
-                linha = [f'  → {descricao}', item_info['Status']]
-                total_item = 0
-                
-                for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
-                    valor = df_despesas[
-                        (df_despesas['Data'].dt.strftime('%Y-%m') == mes) & 
-                        (df_despesas['Descricao'] == descricao)
-                    ]['Valor'].sum()
-                    linha.append(formatar_moeda_br(valor) if valor > 0 else '-')
-                    total_item += valor
-                
-                linha.append(formatar_moeda_br(total_item) if total_item > 0 else '-')
-                dados_matriz.append(linha)
-            
-            # Subtotal da categoria
-            linha_subtotal = [f'SUBTOTAL {categoria}', '']
-            total_categoria = 0
-            
-            for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
-                valor = df_despesas[
-                    (df_despesas['Data'].dt.strftime('%Y-%m') == mes) & 
-                    (df_despesas['Categoria'] == categoria)
-                ]['Valor'].sum()
-                linha_subtotal.append(formatar_moeda_br(valor) if valor > 0 else '-')
-                total_categoria += valor
-            
-            linha_subtotal.append(formatar_moeda_br(total_categoria))
-            dados_matriz.append(linha_subtotal)
-            
-            # Separador entre categorias
-            dados_matriz.append(['', '', '', '', '', ''])
-    
-    # Total despesas - usa valor da planilha original que já tem o total correto
+
     try:
-        df_matriz_original = pd.read_excel('Matriz financeira.xlsx', sheet_name='Matriz Detalhada')
-        linha_total_original = df_matriz_original[df_matriz_original['Categoria'] == 'TOTAL DESPESAS']
-        
-        linha_total_desp = ['TOTAL DESPESAS', '']
-        total_geral_desp = 0
-        
-        if not linha_total_original.empty:
-            # Usa os valores corretos da planilha original
-            for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
-                # Encontra a coluna correspondente ao mês
-                colunas_data = [col for col in df_matriz_original.columns if isinstance(col, pd.Timestamp)]
-                coluna_mes = None
-                for col in colunas_data:
-                    if col.strftime('%Y-%m') == mes:
-                        coluna_mes = col
-                        break
-                
-                if coluna_mes is not None:
-                    valor = linha_total_original[coluna_mes].iloc[0]
-                    if pd.notna(valor) and valor != 0:
-                        linha_total_desp.append(formatar_moeda_br(valor))
-                        total_geral_desp += valor
+        from datetime import datetime
+
+        # Carrega matriz
+        df = pd.read_excel('Matriz financeira.xlsx', sheet_name='Matriz Detalhada')
+
+        # Seleciona colunas: Categoria + meses jun-set/2025
+        colunas_selecionadas = ['Categoria']
+        meses_dict = {}
+        colunas_data = []
+
+        for col in df.columns:
+            if isinstance(col, datetime):  # CORRIGIDO: era pd.Timestamp
+                if col.year == 2025 and 6 <= col.month <= 9:
+                    colunas_selecionadas.append(col)
+                    colunas_data.append(col)
+                    meses_dict[col] = col.strftime('%b/%y')
+
+        # Extrai totais ANTES de formatar
+        linha_receitas = df[df['Categoria'] == 'TOTAL RECEITAS']
+        linha_custos = df[df['Categoria'] == 'TOTAL CUSTOS']
+        linha_despesas = df[df['Categoria'] == 'TOTAL DESPESAS']
+        linha_resultado = df[df['Categoria'] == 'RESULTADO LÍQUIDO']
+
+        # Calcula totais do período
+        total_receitas = sum([linha_receitas[col].iloc[0] for col in colunas_data if not linha_receitas.empty and pd.notna(linha_receitas[col].iloc[0])]) if not linha_receitas.empty else 0
+        total_custos = sum([linha_custos[col].iloc[0] for col in colunas_data if not linha_custos.empty and pd.notna(linha_custos[col].iloc[0])]) if not linha_custos.empty else 0
+        total_despesas = sum([linha_despesas[col].iloc[0] for col in colunas_data if not linha_despesas.empty and pd.notna(linha_despesas[col].iloc[0])]) if not linha_despesas.empty else 0
+        total_resultado = total_receitas - total_custos - total_despesas
+
+        # ==================== CARDS DE HIGHLIGHTS ====================
+        st.markdown("### 📈 Indicadores Principais - Junho a Setembro 2025")
+
+        col1, col2, col3, col4 = st.columns(4)
+
+        with col1:
+            st.markdown(f"""
+            <div style="
+                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                color: white; padding: 25px; border-radius: 12px; text-align: center;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            ">
+                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">💰 FATURAMENTO</div>
+                <div style="font-size: 1.75rem; font-weight: bold;">{formatar_moeda_br(total_receitas)}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with col2:
+            st.markdown(f"""
+            <div style="
+                background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+                color: white; padding: 25px; border-radius: 12px; text-align: center;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            ">
+                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">💳 CUSTOS</div>
+                <div style="font-size: 1.75rem; font-weight: bold;">{formatar_moeda_br(total_custos)}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with col3:
+            st.markdown(f"""
+            <div style="
+                background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+                color: white; padding: 25px; border-radius: 12px; text-align: center;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            ">
+                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">💸 DESPESAS</div>
+                <div style="font-size: 1.75rem; font-weight: bold;">{formatar_moeda_br(total_despesas)}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with col4:
+            cor_resultado = '#10b981' if total_resultado >= 0 else '#ef4444'
+            st.markdown(f"""
+            <div style="
+                background: linear-gradient(135deg, {cor_resultado} 0%, {cor_resultado}dd 100%);
+                color: white; padding: 25px; border-radius: 12px; text-align: center;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            ">
+                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">📊 RESULTADO</div>
+                <div style="font-size: 1.75rem; font-weight: bold;">{formatar_moeda_br(total_resultado)}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.markdown("---")
+
+        # ==================== TABELA DETALHADA ====================
+        st.markdown("### 📋 Detalhamento Completo")
+
+        # Cria DataFrame com apenas essas colunas
+        df_realizado = df[colunas_selecionadas].copy()
+
+        # Renomeia colunas de data
+        df_realizado = df_realizado.rename(columns=meses_dict)
+
+        # Adiciona coluna TOTAL
+        colunas_valores = [v for v in meses_dict.values()]
+        df_realizado['Total'] = 0
+
+        # Índices das linhas especiais para cálculo do Total
+        idx_total_receitas = None
+        idx_resultado = None
+        idx_margem = None
+
+        for idx, row in df_realizado.iterrows():
+            categoria = row['Categoria']
+
+            # Guarda índices
+            if categoria == 'TOTAL RECEITAS':
+                idx_total_receitas = idx
+            elif categoria == 'RESULTADO LÍQUIDO':
+                idx_resultado = idx
+            elif 'Margem Líquida' in str(categoria):
+                idx_margem = idx
+
+            # Calcula total normal (soma dos meses)
+            total = 0
+            for col in colunas_valores:
+                val = row[col]
+                if pd.notna(val) and val != 0:
+                    total += val
+            df_realizado.at[idx, 'Total'] = total
+
+        # Corrige o Total da Margem Líquida (não pode somar %, tem que calcular)
+        if idx_margem is not None and idx_total_receitas is not None and idx_resultado is not None:
+            total_receita = df_realizado.at[idx_total_receitas, 'Total']
+            total_resultado = df_realizado.at[idx_resultado, 'Total']
+
+            if total_receita > 0:
+                margem_total = (total_resultado / total_receita) * 100
+                df_realizado.at[idx_margem, 'Total'] = margem_total
+
+        # Formata valores como moeda (exceto Margem Líquida que é %)
+        for idx, row in df_realizado.iterrows():
+            categoria = row['Categoria']
+            for col in df_realizado.columns:
+                if col != 'Categoria':
+                    valor = row[col]
+                    if 'Margem Líquida' in str(categoria):
+                        # Formata como percentual
+                        df_realizado.at[idx, col] = f"{valor:.2f}%" if pd.notna(valor) and valor != 0 else '-'
                     else:
-                        linha_total_desp.append(formatar_moeda_br(0))
-                else:
-                    linha_total_desp.append(formatar_moeda_br(0))
-        else:
-            # Fallback: calcula manualmente se não encontrar a linha
-            for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
-                df_mes = df_despesas[df_despesas['Data'].dt.strftime('%Y-%m') == mes]
-                df_principais = df_mes[~df_mes['Categoria'].str.startswith('  ', na=False)]
-                valor = df_principais['Valor'].sum()
-                linha_total_desp.append(formatar_moeda_br(valor))
-                total_geral_desp += valor
-        
-        linha_total_desp.append(formatar_moeda_br(total_geral_desp))
-    except Exception as e:
-        st.error(f"Erro ao carregar totais da matriz: {e}")
-        # Fallback em caso de erro
-        linha_total_desp = ['TOTAL DESPESAS', ''] + [formatar_moeda_br(0)] * 5
-    dados_matriz.append(linha_total_desp)
-    
-    # Separador
-    dados_matriz.append(['', '', '', '', '', ''])
-    
-    # RESULTADO LÍQUIDO (Receitas - Custos - Despesas)
-    linha_resultado = ['RESULTADO LÍQUIDO', '']
-    resultado_total = 0
-    
-    for i, mes in enumerate(['2025-06', '2025-07', '2025-08', '2025-09']):
-        rec = df_receitas[df_receitas['Data'].dt.strftime('%Y-%m') == mes]['Valor'].sum()
-        
-        # Calcula TODOS os custos (adquirente + antecipação)
-        custo_adquirente = receitas_por_mes.get(mes, 0) * 0.025  # Todos os meses
-        custo_antecipacao = tarifas_antecipacao.get(mes, 0)      # Só setembro em diante
-        custos_total = custo_adquirente + custo_antecipacao
-        
-        # Usa valor do TOTAL DESPESAS da planilha original
-        try:
-            df_matriz_original = pd.read_excel('Matriz financeira.xlsx', sheet_name='Matriz Detalhada')
-            linha_total_original = df_matriz_original[df_matriz_original['Categoria'] == 'TOTAL DESPESAS']
-            
-            desp = 0
-            if not linha_total_original.empty:
-                # Encontra a coluna correspondente ao mês
-                colunas_data = [col for col in df_matriz_original.columns if isinstance(col, pd.Timestamp)]
-                for col in colunas_data:
-                    if col.strftime('%Y-%m') == mes:
-                        valor_total = linha_total_original[col].iloc[0]
-                        if pd.notna(valor_total):
-                            desp = valor_total
-                        break
-            
-            if desp == 0:
-                # Fallback: calcula manualmente
-                df_desp_mes = df_despesas[df_despesas['Data'].dt.strftime('%Y-%m') == mes]
-                df_desp_principais = df_desp_mes[~df_desp_mes['Categoria'].str.startswith('  ', na=False)]
-                desp = df_desp_principais['Valor'].sum()
-        except:
-            # Fallback em caso de erro
-            df_desp_mes = df_despesas[df_despesas['Data'].dt.strftime('%Y-%m') == mes]
-            df_desp_principais = df_desp_mes[~df_desp_mes['Categoria'].str.startswith('  ', na=False)]
-            desp = df_desp_principais['Valor'].sum()
-        
-        resultado = rec - custos_total - desp
-        linha_resultado.append(formatar_moeda_br(resultado))
-        resultado_total += resultado
-    
-    linha_resultado.append(formatar_moeda_br(resultado_total))
-    dados_matriz.append(linha_resultado)
-    
-    # Cria DataFrame da matriz
-    colunas = ['Categoria', ''] + meses + ['Total']
-    df_matriz = pd.DataFrame(dados_matriz, columns=colunas)
-    
-    # Aplica formatação condicional
-    def estilizar_tabela(row):
-        estilos = [''] * len(row)
-        
-        # Headers principais em negrito
-        if 'TOTAL' in str(row.iloc[0]) or 'RESULTADO' in str(row.iloc[0]):
-            estilos = ['font-weight: bold; background-color: rgba(128, 128, 128, 0.2)'] * len(row)
-        
-        # Valores negativos em vermelho
-        for i in range(2, len(row)):
-            valor_str = str(row.iloc[i])
-            if valor_str.startswith('R$') and '-' in valor_str:
-                estilos[i] = 'color: #dc3545'
-        
-        return estilos
-    
-    # Configuração das colunas para melhor alinhamento
-    col_config = {
-        'Categoria': st.column_config.TextColumn('Categoria', width='large'),
-        '': st.column_config.TextColumn('', width='small'),
-    }
-    
-    # Colunas de meses e total com largura média
-    for mes in meses + ['Total']:
-        col_config[mes] = st.column_config.TextColumn(
-            mes,
-            width='medium',
-            help=f'Valores de {mes}'
+                        # Formata como moeda
+                        df_realizado.at[idx, col] = formatar_moeda_br(valor) if pd.notna(valor) and valor != 0 else '-'
+
+        # Preenche categoria vazia
+        df_realizado['Categoria'] = df_realizado['Categoria'].fillna('')
+
+        # Exibe
+        st.dataframe(
+            df_realizado,
+            use_container_width=True,
+            hide_index=True,
+            height=650
         )
-    
-    # Exibe com altura maior para melhor visualização
-    st.dataframe(
-        df_matriz.style.apply(estilizar_tabela, axis=1),
-        use_container_width=True,
-        hide_index=True,
-        height=600,
-        column_config=col_config
-    )
-    
-    
+
+        st.success(f"✅ Matriz financeira carregada - {len(df_realizado)} linhas | Jun a Set/2025")
+
+    except FileNotFoundError:
+        st.error("❌ Arquivo 'Matriz financeira.xlsx' não encontrado na pasta!")
+    except Exception as e:
+        st.error(f"❌ Erro ao carregar: {str(e)}")
+        import traceback
+        st.code(traceback.format_exc())
+
 
 def exportar_matriz_excel(df_despesas, df_receitas, tarifas_antecipacao):
     """Exporta matriz financeira detalhada para Excel"""
@@ -4313,10 +4188,11 @@ def main():
     secao = st.sidebar.radio(
         "Navegação:",
         [
+            "Faturamento do Mês",
             "Realizado",
             "Gráficos",
             "Fluxo de Caixa",
-            "Faturamento Tempo Real",
+            "Faturamento Total",
             "Projeções"
         ]
     )
@@ -4330,7 +4206,11 @@ def main():
         return
     
     # Roteamento
-    if secao == "Realizado":
+    if secao == "Faturamento do Mês":
+        from modulo_fechamento_mes import main_fechamento_mes
+        main_fechamento_mes()
+
+    elif secao == "Realizado":
         # Combine overview cards + matriz realizada em uma única seção
         # Overview cards integrado na matriz realizada
         st.divider()
@@ -4342,7 +4222,7 @@ def main():
     elif secao == "Fluxo de Caixa":
         mostrar_fluxo_caixa_projecoes()
     
-    elif secao == "Faturamento Tempo Real":
+    elif secao == "Faturamento Total":
         from modulo_faturamento_tempo_real import main_modulo_faturamento_tempo_real
         main_modulo_faturamento_tempo_real()
     

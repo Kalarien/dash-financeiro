@@ -14,9 +14,9 @@ def carregar_dados_faturamento():
     try:
         # Dados atualizados do HTML fornecido
         dados = {
-            'total_geral': 1036850.37,
-            'periodo': 'Junho - Setembro 2025 (Setembro até 22/09)',
-            'ultima_atualizacao': '22/09/2025',
+            'total_geral': 1075085.71,
+            'periodo': 'Junho - Setembro 2025 (Setembro completo)',
+            'ultima_atualizacao': '04/10/2025',
             'por_mes': {
                 'Junho': {
                     'total': 208167.52,
@@ -47,40 +47,40 @@ def carregar_dados_faturamento():
                     }
                 },
                 'Setembro': {
-                    'total': 218838.84,
-                    'percentual': 21.1,
+                    'total': 257074.18,
+                    'percentual': 23.9,
                     'detalhes': {
                         'B2B': 120000.00,
-                        'PAGAR.ME': 68662.44,
-                        'CRIPTO': 21182.40,
-                        'STRIPE': 8994.00
+                        'PAGAR.ME': 101901.78,
+                        'CRIPTO': 23180.40,
+                        'STRIPE': 11992.00
                     }
                 }
             },
             'por_adquirente': {
                 'ASAAS': {
                     'total': 657683.23,
-                    'percentual': 63.4,
+                    'percentual': 61.2,
                     'cor': '#e74c3c'
                 },
                 'CRIPTO': {
-                    'total': 121396.70,
-                    'percentual': 11.7,
+                    'total': 123394.70,
+                    'percentual': 11.5,
                     'cor': '#f39c12'
                 },
                 'B2B': {
                     'total': 120000.00,
-                    'percentual': 11.6,
+                    'percentual': 11.2,
                     'cor': '#2ecc71'
                 },
                 'PAGAR.ME': {
-                    'total': 85908.94,
-                    'percentual': 8.3,
+                    'total': 119148.28,
+                    'percentual': 11.1,
                     'cor': '#3498db'
                 },
                 'STRIPE': {
-                    'total': 51861.50,
-                    'percentual': 5.0,
+                    'total': 54859.50,
+                    'percentual': 5.1,
                     'cor': '#9b59b6'
                 }
             }
