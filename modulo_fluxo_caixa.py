@@ -14,12 +14,9 @@ def formatar_moeda_br(valor):
         return "R$ 0,00"
     return f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
-def main_fluxo_caixa():
-    """Módulo principal de fluxo de caixa"""
-
-    st.title("💰 Fluxo de Caixa")
+def tab_resumo():
+    """Tab de resumo consolidado"""
     st.markdown("### Posição Consolidada - Outubro 2025")
-
     st.info("📅 **Última atualização:** 04/10/2025")
 
     # Dados atualizados
@@ -202,6 +199,92 @@ def main_fluxo_caixa():
         - Total a receber: R$ 300.586,56
         - Principais: B2B (R$ 115.000) e Asaas (R$ 180.404)
         """)
+
+def tab_analise_temporal():
+    """Tab de análise temporal"""
+    st.markdown("### 📈 Análise Temporal do Fluxo de Caixa")
+
+    st.info("🔄 **Funcionalidade em desenvolvimento** - Será implementada com histórico de movimentações")
+
+    st.markdown("""
+    **Esta seção incluirá:**
+    - 📊 Gráfico de evolução do saldo ao longo do tempo
+    - 💹 Análise de entradas e saídas mensais
+    - 📉 Tendências e padrões de fluxo
+    - 🔍 Filtros por período e gateway
+    """)
+
+def tab_projecoes():
+    """Tab de projeções"""
+    st.markdown("### 🔮 Projeções de Fluxo de Caixa")
+
+    st.info("📅 **Projeção para próximos 90 dias**")
+
+    # Dados de projeção simples
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.markdown("""
+        <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                    color: white; padding: 20px; border-radius: 12px; text-align: center;">
+            <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">30 DIAS</div>
+            <div style="font-size: 1.5rem; font-weight: bold;">R$ 550.000</div>
+            <div style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">Projeção conservadora</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+                    color: white; padding: 20px; border-radius: 12px; text-align: center;">
+            <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">60 DIAS</div>
+            <div style="font-size: 1.5rem; font-weight: bold;">R$ 700.000</div>
+            <div style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">Baseado em histórico</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown("""
+        <div style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+                    color: white; padding: 20px; border-radius: 12px; text-align: center;">
+            <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">90 DIAS</div>
+            <div style="font-size: 1.5rem; font-weight: bold;">R$ 850.000</div>
+            <div style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">Com novos contratos</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("---")
+
+    st.markdown("#### 📋 Premissas da Projeção")
+    st.markdown("""
+    - **Recebíveis atuais:** R$ 300.586,56 (confirmados)
+    - **B2B pipeline:** R$ 115.000,00 (30-60 dias)
+    - **Receita recorrente estimada:** R$ 250.000/mês
+    - **Taxa de conversão:** 85%
+    - **Crescimento mensal:** 10-15%
+    """)
+
+    st.warning("""
+    ⚠️ **Nota:** Projeções são estimativas baseadas em dados históricos e podem variar
+    conforme sazonalidade, novos contratos e condições de mercado.
+    """)
+
+def main_fluxo_caixa():
+    """Módulo principal de fluxo de caixa"""
+
+    st.title("💰 Fluxo de Caixa")
+
+    # Cria as 3 tabs
+    tab1, tab2, tab3 = st.tabs(["📊 Resumo", "📈 Análise Temporal", "🔮 Projeções"])
+
+    with tab1:
+        tab_resumo()
+
+    with tab2:
+        tab_analise_temporal()
+
+    with tab3:
+        tab_projecoes()
 
 if __name__ == "__main__":
     main_fluxo_caixa()
