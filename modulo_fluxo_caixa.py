@@ -408,16 +408,13 @@ def main_fluxo_caixa():
 
     st.title("💰 Fluxo de Caixa")
 
-    # Cria as 3 tabs
-    tab1, tab2, tab3 = st.tabs(["📊 Resumo", "📈 Análise Temporal", "🔮 Projeções"])
+    # Cria 2 tabs (Análise Temporal oculta)
+    tab1, tab2 = st.tabs(["📊 Resumo", "🔮 Projeções"])
 
     with tab1:
         tab_resumo()
 
     with tab2:
-        tab_analise_temporal()
-
-    with tab3:
         tab_projecoes()
 
 if __name__ == "__main__":
