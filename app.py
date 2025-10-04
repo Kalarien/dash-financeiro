@@ -4190,7 +4190,7 @@ def main():
         [
             "Faturamento do Mês",
             "Realizado",
-            "Gráficos",
+            # "Gráficos",  # Temporariamente oculto
             "Fluxo de Caixa",
             "Faturamento Total",
             "Projeções"
@@ -4220,7 +4220,8 @@ def main():
         mostrar_graficos_avancados(df_despesas, df_receitas)
     
     elif secao == "Fluxo de Caixa":
-        mostrar_fluxo_caixa_projecoes()
+        from modulo_fluxo_caixa import main_fluxo_caixa
+        main_fluxo_caixa()
     
     elif secao == "Faturamento Total":
         from modulo_faturamento_tempo_real import main_modulo_faturamento_tempo_real
