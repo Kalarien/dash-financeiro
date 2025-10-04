@@ -224,15 +224,15 @@ def tab_projecoes():
         # Carrega a Matriz Financeira
         df_matriz = pd.read_excel('Matriz financeira.xlsx', sheet_name='Matriz Detalhada')
 
-        # Identifica colunas de data (outubro, novembro, dezembro)
+        # Identifica colunas de data (outubro em diante)
         colunas_data = []
         for col in df_matriz.columns:
             if isinstance(col, datetime):
-                if col.year == 2025 and col.month >= 10:
+                if (col.year == 2025 and col.month >= 10) or (col.year == 2026 and col.month <= 3):
                     colunas_data.append(col)
 
-        # Pega outubro, novembro, dezembro
-        meses_projecao = sorted(colunas_data)[:3]
+        # Pega 6 meses: out, nov, dez/2025 + jan, fev, mar/2026
+        meses_projecao = sorted(colunas_data)[:6]
 
         # Extrai dados da matriz
         linha_receitas = df_matriz[df_matriz['Categoria'] == 'TOTAL RECEITAS']
@@ -268,11 +268,14 @@ def tab_projecoes():
         # Cards de projeção
         st.info(f"📅 **Saldo inicial:** {formatar_moeda_br(saldo_inicial)} (Em conta + A receber)")
 
-        cols = st.columns(3)
-        cores = ['#10b981', '#6366f1', '#8b5cf6']
+        # Divide em 2 linhas de 3 cards
+        cores = ['#10b981', '#6366f1', '#8b5cf6', '#f59e0b', '#ef4444', '#06b6d4']
 
-        for idx, proj in enumerate(projecoes):
-            with cols[idx]:
+        # Primeira linha (3 primeiros meses)
+        cols1 = st.columns(3)
+        for idx in range(min(3, len(projecoes))):
+            proj = projecoes[idx]
+            with cols1[idx]:
                 st.markdown(f"""
                 <div style="background: linear-gradient(135deg, {cores[idx]} 0%, {cores[idx]}dd 100%);
                             color: white; padding: 20px; border-radius: 12px; text-align: center;">
@@ -283,6 +286,23 @@ def tab_projecoes():
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
+
+        # Segunda linha (3 últimos meses)
+        if len(projecoes) > 3:
+            cols2 = st.columns(3)
+            for idx in range(3, min(6, len(projecoes))):
+                proj = projecoes[idx]
+                with cols2[idx - 3]:
+                    st.markdown(f"""
+                    <div style="background: linear-gradient(135deg, {cores[idx]} 0%, {cores[idx]}dd 100%);
+                                color: white; padding: 20px; border-radius: 12px; text-align: center;">
+                        <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">{proj['mes_nome'].upper()}</div>
+                        <div style="font-size: 1.5rem; font-weight: bold;">{formatar_moeda_br(proj['saldo_projetado'])}</div>
+                        <div style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">
+                            {'+' if proj['resultado'] >= 0 else ''}{formatar_moeda_br(proj['resultado'])} no mês
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
 
         # Tabela detalhada
         st.markdown("---")
@@ -392,7 +412,7 @@ def tab_projecoes():
         st.markdown(f"""
         <div style="background: linear-gradient(135deg, {cor_variacao} 0%, {cor_variacao}dd 100%);
                     color: white; padding: 20px; border-radius: 12px; text-align: center; margin-top: 20px;">
-            <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">VARIAÇÃO TOTAL (3 MESES)</div>
+            <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">VARIAÇÃO TOTAL (6 MESES)</div>
             <div style="font-size: 2rem; font-weight: bold;">
                 {'+' if variacao_total >= 0 else ''}{formatar_moeda_br(variacao_total)}
             </div>
