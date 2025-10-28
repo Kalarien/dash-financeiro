@@ -1,0 +1,165 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                                                                           ║
+║  📋 TEXTO PARA COPIAR E COLAR NO CLAUDE DO NOTEBOOK                      ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+===============================================================================
+INSTRUÇÕES:
+===============================================================================
+
+1. No notebook, abra o Claude Code ou Claude.ai
+2. Copie TODO o texto abaixo (da linha "INÍCIO DO PROMPT" até "FIM DO PROMPT")
+3. ANTES de colar, preencha as partes marcadas com [PREENCHER]
+4. Cole no Claude
+5. Depois, envie os arquivos: RESUMO_TECNICO.txt e TUTORIAL_ATUALIZACAO_MENSAL.md
+
+===============================================================================
+INÍCIO DO PROMPT (COPIE DAQUI PRA BAIXO)
+===============================================================================
+
+Olá Claude! Preciso da sua ajuda para atualizar um Dashboard Financeiro que está em deploy no Streamlit Cloud.
+
+🎯 CONTEXTO:
+Tenho um dashboard financeiro desenvolvido em Streamlit que está em produção. Ele exibe dados financeiros que precisam ser atualizados mensalmente. Estou viajando e preciso fazer essa atualização do meu notebook.
+
+📦 REPOSITÓRIO:
+- GitHub: https://github.com/Kalarien/dash-financeiro.git
+- Deploy: Streamlit Cloud (atualiza automaticamente quando faço push)
+- Branch principal: main
+
+🎯 OBJETIVO:
+Atualizar os dados financeiros do mês de [PREENCHER: MÊS/ANO - ex: Outubro 2025] no dashboard.
+
+Isso envolve:
+1. Clonar o repositório (se ainda não tiver clonado)
+2. Editar 2 arquivos Python com novos dados:
+   - modulo_fechamento_mes.py (dados de faturamento e caixa)
+   - modulo_fluxo_caixa.py (saldos dos gateways)
+3. Fazer commit e push para o GitHub
+4. O Streamlit detecta e atualiza automaticamente
+
+💻 INFORMAÇÕES DO MEU NOTEBOOK:
+- Sistema operacional: [PREENCHER: Windows/Mac/Linux]
+- Git instalado: [PREENCHER: Sim/Não]
+- Repositório já clonado: [PREENCHER: Sim/Não]
+- Caminho da pasta (se já tiver): [PREENCHER: ex: C:\dash-financeiro]
+
+📊 DADOS QUE TENHO PARA ATUALIZAR:
+
+═══ FATURAMENTO DO MÊS ═══
+- Mês: [PREENCHER: ex: Outubro 2025]
+- Data de atualização: [PREENCHER: ex: 01/11/2025]
+- Faturamento Total: R$ [PREENCHER]
+- Faturamento B2B: R$ [PREENCHER] (vendas corporativas)
+- Faturamento B2C: R$ [PREENCHER] (transações online)
+- Total de transações B2C: [PREENCHER: número]
+
+Faturamento por gateway (B2C):
+- Pagar.me: R$ [PREENCHER] ([PREENCHER: XX] transações, taxa [PREENCHER: X.XX]%)
+- Stripe: R$ [PREENCHER] ([PREENCHER: XX] transações, taxa [PREENCHER: X.XX]%)
+- Crypto: R$ [PREENCHER] ([PREENCHER: XX] transações, taxa ~1%)
+
+═══ CAIXA RECEBIDO NO MÊS ═══
+- Total Bruto Recebido: R$ [PREENCHER] (incluindo antecipações)
+- Total de Taxas Pagas: R$ [PREENCHER] ([PREENCHER: XX.XX]% do bruto)
+- Valor Líquido: R$ [PREENCHER] (após todas as taxas)
+- Antecipações (se houver): R$ [PREENCHER]
+
+Caixa por gateway:
+- Asaas: Bruto R$ [PREENCHER] | Taxas R$ [PREENCHER] | Líquido R$ [PREENCHER]
+- Pagar.me: Bruto R$ [PREENCHER] | Taxas R$ [PREENCHER] | Líquido R$ [PREENCHER]
+- Stripe: Bruto R$ [PREENCHER] | Taxas R$ [PREENCHER] | Líquido R$ [PREENCHER]
+- Crypto: Bruto R$ [PREENCHER] | Taxas R$ [PREENCHER] | Líquido R$ [PREENCHER]
+
+═══ SALDOS ATUAIS (FLUXO DE CAIXA) ═══
+Data dos saldos: [PREENCHER: ex: 01/11/2025]
+
+- Asaas: Em conta R$ [PREENCHER] | A receber R$ [PREENCHER]
+- Pagar.me: Em conta R$ [PREENCHER] | A receber R$ [PREENCHER]
+- Stripe: Em conta R$ [PREENCHER] | A receber R$ [PREENCHER]
+- Cripto: Em conta R$ [PREENCHER] | A receber R$ [PREENCHER]
+- B2B Corporativo: Em conta R$ [PREENCHER] | A receber R$ [PREENCHER]
+
+🔐 AUTENTICAÇÃO:
+- Tenho acesso ao GitHub: Sim
+- Usuário GitHub: [PREENCHER: seu username]
+- Tenho Personal Access Token: [PREENCHER: Sim/Não]
+
+📚 ARQUIVOS QUE VOU TE ENVIAR:
+Logo após esta mensagem, vou te enviar:
+1. RESUMO_TECNICO.txt - Resumo técnico completo do projeto
+2. TUTORIAL_ATUALIZACAO_MENSAL.md - Tutorial passo a passo detalhado
+3. CHECKLIST_ATUALIZACAO.md - Checklist de atualização
+
+🆘 COMO VOCÊ PODE ME AJUDAR:
+- Se eu não tiver Git instalado, me ajude a instalar
+- Se eu não tiver o repositório clonado, me ajude a clonar
+- Me guie para editar os arquivos Python nos locais corretos
+- Me ajude a fazer commit e push corretamente
+- Me ajude a verificar se o deploy funcionou
+
+💡 PREFERÊNCIAS:
+- [ESCOLHA UMA OPÇÃO:]
+  [ ] Quero que você me mostre EXATAMENTE onde mudar cada valor (passo a passo)
+  [ ] Quero que você crie os arquivos já atualizados para eu só substituir
+
+Você está pronto para me ajudar?
+
+===============================================================================
+FIM DO PROMPT (COPIE ATÉ AQUI)
+===============================================================================
+
+===============================================================================
+PRÓXIMO PASSO APÓS COLAR O PROMPT:
+===============================================================================
+
+Envie estes arquivos para o Claude (arrastar e soltar ou usar @):
+
+1️⃣ RESUMO_TECNICO.txt
+2️⃣ TUTORIAL_ATUALIZACAO_MENSAL.md
+3️⃣ CHECKLIST_ATUALIZACAO.md
+
+Estes arquivos estão todos no repositório:
+https://github.com/Kalarien/dash-financeiro.git
+
+Ou você pode copiá-los deste PC antes de viajar!
+
+===============================================================================
+EXEMPLO DE DADOS PREENCHIDOS:
+===============================================================================
+
+Para você ter uma ideia de como preencher, aqui está um exemplo:
+
+═══ FATURAMENTO DO MÊS ═══
+- Mês: Outubro 2025
+- Data de atualização: 01/11/2025
+- Faturamento Total: R$ 280.500,00
+- Faturamento B2B: R$ 130.000,00
+- Faturamento B2C: R$ 150.500,00
+- Total de transações B2C: 75
+
+Faturamento por gateway (B2C):
+- Pagar.me: R$ 110.000,00 (55 transações, taxa 3.1%)
+- Stripe: R$ 13.500,00 (6 transações, taxa 4.2%)
+- Crypto: R$ 27.000,00 (14 transações, taxa ~1%)
+
+═══ SALDOS ATUAIS ═══
+- Asaas: Em conta R$ 215.000,00 | A receber R$ 195.000,00
+- Pagar.me: Em conta R$ 135.000,00 | A receber R$ 8.500,00
+- Stripe: Em conta R$ 13.500,00 | A receber R$ 0,00
+- Cripto: Em conta R$ 35.000,00 | A receber R$ 0,00
+- B2B: Em conta R$ 0,00 | A receber R$ 120.000,00
+
+===============================================================================
+PRONTO!
+===============================================================================
+
+Agora você tem tudo que precisa para trabalhar com o Claude no notebook.
+
+Boa viagem e boa atualização! 🚀
+
+Se tiver dúvidas durante o processo, o Claude do notebook vai te ajudar
+passo a passo. Ele tem toda a documentação necessária.
+
+===============================================================================
