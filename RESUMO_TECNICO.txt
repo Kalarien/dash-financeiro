@@ -1,0 +1,204 @@
+===============================================================================
+RESUMO TÉCNICO - DASHBOARD FINANCEIRO
+===============================================================================
+
+📦 PROJETO: Dashboard Financeiro Streamlit
+🔗 REPO: https://github.com/Kalarien/dash-financeiro.git
+🚀 DEPLOY: Streamlit Cloud (auto-deploy on push)
+🔐 LOGIN: admin / CulturaBuilder852@
+
+===============================================================================
+ESTRUTURA DO PROJETO
+===============================================================================
+
+repo-deploy/
+├── app.py                              # App principal Streamlit
+├── modulo_fechamento_mes.py           # ⚠️ EDITAR - Dados do mês fechado
+├── modulo_fluxo_caixa.py              # ⚠️ EDITAR - Saldos dos gateways
+├── modulo_faturamento_tempo_real.py   # Faturamento total
+├── modulo_contas_receber_asaas.py     # Integração Asaas
+├── importador_matriz_unificada.py     # Importador de dados
+├── gerar_auxiliares_da_matriz.py      # Gerador auxiliar
+├── requirements.txt                    # Dependências Python
+├── config.toml                         # Config Streamlit
+├── Matriz financeira.xlsx             # Planilha de dados
+├── despesas_EDITAVEL.xlsx             # Despesas
+├── projecoes_5_anos.xlsx              # Projeções
+└── [outros arquivos .xlsx]            # Dados diversos
+
+===============================================================================
+ABAS DO DASHBOARD (Navegação Lateral)
+===============================================================================
+
+1. Faturamento do Mês     → modulo_fechamento_mes.py
+2. Realizado              → app.py (função mostrar_matriz_realizada)
+3. Fluxo de Caixa        → modulo_fluxo_caixa.py
+4. Faturamento Total     → modulo_faturamento_tempo_real.py
+5. Projeções             → app.py (função mostrar_projecoes_5_anos)
+
+===============================================================================
+ATUALIZAÇÃO MENSAL - O QUE MUDAR
+===============================================================================
+
+📄 ARQUIVO 1: modulo_fechamento_mes.py
+────────────────────────────────────────
+Linha 53:  Mês/ano no título
+Linha 56:  Data de atualização
+L 67-96:   Métricas faturamento (4 cards)
+L 101-138: Tabela faturamento por adquirente
+L 167-196: Métricas de caixa (4 cards)
+L 201-246: Tabela de caixa por adquirente
+L 267-315: Comparativo Faturamento vs Caixa
+L 321-353: Resumo executivo (4 cards grandes)
+
+📄 ARQUIVO 2: modulo_fluxo_caixa.py
+────────────────────────────────────────
+Linha 19:  Mês/ano no título
+Linha 20:  Data de atualização
+L 23-64:   dados_gateways = [ ... ]
+           5 gateways: Asaas, Pagar.me, Stripe, Cripto, B2B
+           Para cada: 'Em Conta', 'A Receber'
+
+===============================================================================
+DADOS QUE PRECISAM SER COLETADOS
+===============================================================================
+
+FATURAMENTO DO MÊS:
+□ Faturamento B2B: R$ _______
+□ Faturamento Pagar.me: R$ _______ (XX transações)
+□ Faturamento Stripe: R$ _______ (XX transações)
+□ Faturamento Crypto: R$ _______ (XX transações)
+□ Total transações B2C: XX
+□ Taxas médias de cada gateway
+
+CAIXA RECEBIDO:
+□ Valor bruto recebido total: R$ _______
+□ Total de taxas pagas: R$ _______
+□ Valor líquido: R$ _______
+□ Antecipações (se houver): R$ _______
+
+SALDOS ATUAIS (para Fluxo de Caixa):
+□ Asaas - Em conta: R$ _______ | A receber: R$ _______
+□ Pagar.me - Em conta: R$ _______ | A receber: R$ _______
+□ Stripe - Em conta: R$ _______ | A receber: R$ _______
+□ Cripto - Em conta: R$ _______ | A receber: R$ _______
+□ B2B - Em conta: R$ _______ | A receber: R$ _______
+
+===============================================================================
+FLUXO DE ATUALIZAÇÃO
+===============================================================================
+
+1. CLONAR (primeira vez)
+   git clone https://github.com/Kalarien/dash-financeiro.git
+   cd dash-financeiro
+
+2. ATUALIZAR (se já tem clonado)
+   cd dash-financeiro
+   git pull origin main
+
+3. EDITAR OS ARQUIVOS
+   - modulo_fechamento_mes.py
+   - modulo_fluxo_caixa.py
+
+4. TESTAR LOCAL (recomendado)
+   pip install -r requirements.txt
+   streamlit run app.py
+   → Acessa http://localhost:8501
+
+5. COMMIT
+   git add modulo_fechamento_mes.py modulo_fluxo_caixa.py
+   git commit -m "Atualização dados financeiros - [MÊS] 2025"
+
+6. PUSH
+   git push origin main
+   → Streamlit detecta e faz deploy automático (1-3 min)
+
+7. VERIFICAR
+   → Acessar https://share.streamlit.io/
+   → Ver logs do deploy
+   → Acessar dashboard em produção
+
+===============================================================================
+DEPENDÊNCIAS (requirements.txt)
+===============================================================================
+
+streamlit>=1.28.0
+pandas>=2.0.0
+plotly>=5.15.0
+openpyxl>=3.1.0
+xlrd>=2.0.0
+python-dateutil>=2.8.0
+requests>=2.31.0
+
+===============================================================================
+AUTENTICAÇÃO GITHUB
+===============================================================================
+
+Para fazer push, você precisa:
+- Username: [seu username do GitHub]
+- Password: Personal Access Token (NÃO a senha normal)
+
+Criar token: https://github.com/settings/tokens
+Permissões: repo (acesso completo ao repositório)
+
+===============================================================================
+TROUBLESHOOTING COMUM
+===============================================================================
+
+❌ "Git não reconhecido"
+   → Instalar Git: https://git-scm.com/download
+
+❌ "Permission denied (publickey)"
+   → Usar HTTPS, não SSH
+   → Usar Personal Access Token como senha
+
+❌ "ModuleNotFoundError"
+   → pip install -r requirements.txt
+
+❌ Streamlit não atualiza
+   → Verificar se push foi bem-sucedido: git log -1
+   → Forçar reboot em https://share.streamlit.io/
+
+❌ Erro ao carregar dados
+   → Verificar se arquivos .xlsx estão no repo
+   → git add "Matriz financeira.xlsx"
+
+===============================================================================
+COMANDOS ÚTEIS
+===============================================================================
+
+# Ver status
+git status
+
+# Ver histórico
+git log --oneline
+
+# Ver diferenças
+git diff modulo_fechamento_mes.py
+
+# Desfazer mudanças locais (CUIDADO!)
+git checkout -- modulo_fechamento_mes.py
+
+# Reverter último commit (CUIDADO!)
+git revert HEAD
+
+===============================================================================
+LINKS IMPORTANTES
+===============================================================================
+
+📦 Repositório:
+   https://github.com/Kalarien/dash-financeiro.git
+
+🚀 Streamlit Cloud:
+   https://share.streamlit.io/
+
+🔑 Personal Access Token:
+   https://github.com/settings/tokens
+
+📚 Git Documentation:
+   https://git-scm.com/doc
+
+📖 Streamlit Docs:
+   https://docs.streamlit.io/
+
+===============================================================================

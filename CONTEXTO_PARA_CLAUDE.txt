@@ -1,0 +1,61 @@
+===============================================================================
+PROMPT PARA COPIAR E COLAR NO CLAUDE DO NOTEBOOK
+===============================================================================
+
+Olá Claude! Preciso da sua ajuda para atualizar um Dashboard Financeiro que está em deploy no Streamlit Cloud.
+
+🎯 CONTEXTO:
+Tenho um dashboard financeiro desenvolvido em Streamlit que está em produção. Ele exibe dados financeiros que precisam ser atualizados mensalmente. Estou viajando e preciso fazer essa atualização do meu notebook.
+
+📦 REPOSITÓRIO:
+- GitHub: https://github.com/Kalarien/dash-financeiro.git
+- Deploy: Streamlit Cloud (atualiza automaticamente quando faço push)
+- Branch principal: main
+
+📁 ARQUIVOS QUE VOU TE ENVIAR:
+1. TUTORIAL_ATUALIZACAO_MENSAL.md - Tutorial completo passo a passo
+2. CHECKLIST_ATUALIZACAO.md - Checklist de atualização
+3. auxiliar_atualizacao.py - Script auxiliar
+4. modulo_fechamento_mes.py - Arquivo Python que preciso editar
+5. modulo_fluxo_caixa.py - Arquivo Python que preciso editar
+
+🎯 O QUE PRECISO FAZER:
+Preciso atualizar os dados financeiros do mês de [INSERIR MÊS AQUI] no dashboard. Isso envolve:
+
+1. Clonar o repositório (se ainda não tiver clonado)
+2. Editar 2 arquivos Python com novos dados:
+   - modulo_fechamento_mes.py (dados de faturamento e caixa)
+   - modulo_fluxo_caixa.py (saldos dos gateways)
+3. Fazer commit e push para o GitHub
+4. O Streamlit vai detectar e atualizar automaticamente
+
+📊 DADOS QUE TENHO PARA ATUALIZAR:
+[VOCÊ VAI PREENCHER AQUI COM OS DADOS QUE COLETOU]
+
+Exemplo:
+- Mês a atualizar: Outubro 2025
+- Faturamento Total: R$ 280.500,00
+- Faturamento B2B: R$ 130.000,00
+- Asaas em conta: R$ 215.000,00
+- Asaas a receber: R$ 195.000,00
+- Pagar.me em conta: R$ 135.000,00
+- [etc...]
+
+🆘 INSTRUÇÕES:
+Por favor, me ajude seguindo o TUTORIAL_ATUALIZACAO_MENSAL.md que vou te enviar. Se eu tiver dúvidas em algum passo específico, vou te perguntar.
+
+Principais dúvidas que posso ter:
+- Como clonar o repositório pela primeira vez
+- Onde exatamente editar os valores nos arquivos Python
+- Como fazer commit e push corretamente
+- Como verificar se o deploy funcionou
+
+💡 IMPORTANTE:
+- Tenho acesso ao GitHub (usuário: [SEU USUÁRIO])
+- Tenho Personal Access Token configurado
+- O notebook tem Git instalado [SIM/NÃO - se não tiver, me ajude a instalar]
+- Sistema operacional do notebook: [Windows/Mac/Linux]
+
+Você está pronto para me ajudar? Vou começar te enviando os arquivos!
+
+===============================================================================
