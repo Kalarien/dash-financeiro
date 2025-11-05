@@ -105,17 +105,17 @@ def formatar_moeda_br(valor):
 
 def main_modulo_faturamento_tempo_real():
     """Módulo principal de faturamento tempo real"""
-    st.title("💰 Faturamento Tempo Real")
+    st.title("Faturamento Tempo Real")
 
     # Carrega dados
     dados = carregar_dados_faturamento()
 
     if not dados:
-        st.error("❌ Erro ao carregar dados de faturamento")
+        st.error("Erro ao carregar dados de faturamento")
         return
 
     # Info de atualização
-    st.info(f"📅 **Última atualização:** {dados['ultima_atualizacao']} | **Período:** {dados['periodo']}")
+    st.info(f"**Última atualização:** {dados['ultima_atualizacao']} | **Período:** {dados['periodo']}")
 
     # Total Geral
     st.markdown("---")
@@ -138,29 +138,33 @@ def main_modulo_faturamento_tempo_real():
 
     # Faturamento por Mês
     st.markdown("---")
-    st.subheader("📅 Faturamento por Mês")
+    st.subheader("Faturamento por Mês")
 
-    cols_mes = st.columns(4)
-    cores_mes = ['#4ecdc4', '#45b7d1', '#96ceb4', '#feca57']
+    cols_mes = st.columns(5)  # 5 colunas para 5 meses
+    cores_mes = ['#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff6b6b']
 
     for i, (mes, dados_mes) in enumerate(dados['por_mes'].items()):
         with cols_mes[i]:
-            # Card do mês
+            # Card do mês com gradiente
+            cor = cores_mes[i]
             st.markdown(f"""
             <div style="
-                background: white; padding: 25px; border-radius: 15px;
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-                text-align: center; border-left: 5px solid {cores_mes[i]};
-                margin-bottom: 20px;
+                background: linear-gradient(135deg, {cor} 0%, {cor}dd 100%);
+                padding: 20px;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                text-align: center;
+                margin-bottom: 15px;
+                min-height: 120px;
             ">
-                <div style="font-size: 1.1em; color: #666; margin-bottom: 10px; font-weight: 500;">
+                <div style="font-size: 0.9em; color: white; opacity: 0.9; margin-bottom: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">
                     {mes}
                 </div>
-                <div style="font-size: 1.5em; font-weight: bold; color: #333;">
+                <div style="font-size: 1.4em; font-weight: bold; color: white; margin-bottom: 6px;">
                     {formatar_moeda_br(dados_mes['total'])}
                 </div>
-                <div style="font-size: 0.9em; color: #999; margin-top: 5px;">
-                    {dados_mes['percentual']}%
+                <div style="font-size: 0.85em; color: white; opacity: 0.8;">
+                    {dados_mes['percentual']}% do total
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -172,34 +176,38 @@ def main_modulo_faturamento_tempo_real():
 
     # Faturamento por Adquirente
     st.markdown("---")
-    st.subheader("🏦 Faturamento por Adquirente")
+    st.subheader("Faturamento por Adquirente")
 
     cols_gateway = st.columns(5)
 
     for i, (gateway, dados_gateway) in enumerate(dados['por_adquirente'].items()):
         with cols_gateway[i]:
+            cor = dados_gateway['cor']
             st.markdown(f"""
             <div style="
-                background: white; padding: 25px; border-radius: 15px;
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-                text-align: center; border-left: 5px solid {dados_gateway['cor']};
-                margin-bottom: 20px;
+                background: linear-gradient(135deg, {cor} 0%, {cor}dd 100%);
+                padding: 20px;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                text-align: center;
+                margin-bottom: 15px;
+                min-height: 120px;
             ">
-                <div style="font-size: 1.1em; color: #666; margin-bottom: 10px; font-weight: 500;">
+                <div style="font-size: 0.9em; color: white; opacity: 0.9; margin-bottom: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">
                     {gateway}
                 </div>
-                <div style="font-size: 1.5em; font-weight: bold; color: #333;">
+                <div style="font-size: 1.4em; font-weight: bold; color: white; margin-bottom: 6px;">
                     {formatar_moeda_br(dados_gateway['total'])}
                 </div>
-                <div style="font-size: 0.9em; color: #999; margin-top: 5px;">
-                    {dados_gateway['percentual']}%
+                <div style="font-size: 0.85em; color: white; opacity: 0.8;">
+                    {dados_gateway['percentual']}% do total
                 </div>
             </div>
             """, unsafe_allow_html=True)
 
     # Destaque Setembro
     st.markdown("---")
-    st.subheader("🔥 Destaque: Setembro 2025")
+    st.subheader("Destaque: Setembro 2025")
 
     setembro_dados = dados['por_mes']['Setembro']
 
@@ -207,7 +215,7 @@ def main_modulo_faturamento_tempo_real():
 
     with col1:
         st.success(f"**Total Setembro:** {formatar_moeda_br(setembro_dados['total'])}")
-        st.info("📊 **Maior crescimento:** B2B com R$ 120.000,00")
+        st.info("**Maior crescimento:** B2B com R$ 120.000,00")
 
     with col2:
         st.markdown("**Composição Setembro:**")
@@ -221,8 +229,8 @@ def main_modulo_faturamento_tempo_real():
     col1, col2, col3 = st.columns([1, 1, 1])
 
     with col2:
-        if st.button("🔄 Atualizar Dados", use_container_width=True):
-            st.success("✅ Dados atualizados com sucesso!")
+        if st.button("Atualizar Dados", use_container_width=True):
+            st.success("Dados atualizados com sucesso!")
             st.rerun()
 
 if __name__ == "__main__":
