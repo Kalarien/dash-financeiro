@@ -15,33 +15,77 @@ def formatar_moeda_br(valor):
     return f"R$ {valor:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
 
 def criar_metrica_card(label, valor, detalhe="", cor="neutral"):
-    """Cria card de métrica estilizado"""
+    """Cria card de métrica estilizado com design moderno"""
     cores = {
-        'positive': '#10b981',
-        'negative': '#ef4444',
-        'neutral': '#6366f1',
-        'warning': '#f59e0b'
+        'positive': {
+            'gradient': 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+            'icon': '📈'
+        },
+        'negative': {
+            'gradient': 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+            'icon': '📉'
+        },
+        'neutral': {
+            'gradient': 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+            'icon': '📊'
+        },
+        'warning': {
+            'gradient': 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+            'icon': '⚠️'
+        }
     }
 
-    cor_hex = cores.get(cor, cores['neutral'])
+    config = cores.get(cor, cores['neutral'])
 
     return f"""
     <div style="
-        background: #f9fafb;
-        border: 1px solid #e5e7eb;
-        border-left: 4px solid {cor_hex};
-        border-radius: 12px;
-        padding: 20px;
+        background: {config['gradient']};
+        border-radius: 16px;
+        padding: 24px;
         margin-bottom: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        min-height: 140px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     ">
-        <div style="color: #6b7280; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
-            {label}
+        <div style="
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        ">
+            <div style="
+                color: rgba(255, 255, 255, 0.9);
+                font-size: 0.875rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                font-weight: 500;
+            ">
+                {label}
+            </div>
+            <div style="font-size: 1.5rem; opacity: 0.8;">
+                {config['icon']}
+            </div>
         </div>
-        <div style="font-size: 1.75rem; font-weight: bold; color: #111827; margin-bottom: 5px;">
-            {valor}
-        </div>
-        <div style="color: #9ca3af; font-size: 0.875rem;">
-            {detalhe}
+        <div>
+            <div style="
+                font-size: 2rem;
+                font-weight: bold;
+                color: white;
+                margin-bottom: 6px;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            ">
+                {valor}
+            </div>
+            <div style="
+                color: rgba(255, 255, 255, 0.85);
+                font-size: 0.8125rem;
+                font-weight: 400;
+            ">
+                {detalhe}
+            </div>
         </div>
     </div>
     """
