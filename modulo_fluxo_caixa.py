@@ -17,16 +17,16 @@ def formatar_moeda_br(valor):
 def tab_resumo():
     """Tab de resumo consolidado"""
     st.markdown("### Posição Consolidada - Novembro 2025")
-    st.info("📅 **Última atualização:** 05/11/2025")
+    st.info("**Última atualização:** 05/11/2025")
 
     # Dados atualizados
     dados_gateways = [
         {
             'Gateway': 'Asaas',
-            'Em Conta': 189975.30,
+            'Em Conta': 159975.30,
             'A Receber': 128230.56,
-            'Total': 189975.30 + 128230.56,
-            'Status': '🟢 Ativo',
+            'Total': 159975.30 + 128230.56,
+            'Status': 'Ativo',
             'Cor': '#10b981'
         },
         {
@@ -34,7 +34,7 @@ def tab_resumo():
             'Em Conta': 254873.70,
             'A Receber': 3506.31,
             'Total': 254873.70 + 3506.31,
-            'Status': '🟢 Ativo',
+            'Status': 'Ativo',
             'Cor': '#3b82f6'
         },
         {
@@ -42,7 +42,7 @@ def tab_resumo():
             'Em Conta': 6791.40,
             'A Receber': 0.00,
             'Total': 6791.40,
-            'Status': '🔵 Internacional',
+            'Status': 'Internacional',
             'Cor': '#8b5cf6'
         },
         {
@@ -50,7 +50,7 @@ def tab_resumo():
             'Em Conta': 43690.20,
             'A Receber': 0.00,
             'Total': 43690.20,
-            'Status': '🟡 Cripto',
+            'Status': 'Cripto',
             'Cor': '#f59e0b'
         },
         {
@@ -58,7 +58,7 @@ def tab_resumo():
             'Em Conta': 0.00,
             'A Receber': 100000.00,
             'Total': 100000.00,
-            'Status': '⏳ Aguardando',
+            'Status': 'Aguardando',
             'Cor': '#ef4444'
         }
     ]
@@ -70,7 +70,7 @@ def tab_resumo():
 
     # ==================== CARDS DE RESUMO ====================
     st.markdown("---")
-    st.markdown("## 💵 Resumo Consolidado")
+    st.markdown("## Resumo Consolidado")
 
     col1, col2, col3 = st.columns(3)
 
@@ -81,7 +81,7 @@ def tab_resumo():
             color: white; padding: 30px; border-radius: 12px; text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         ">
-            <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">💰 EM CONTA</div>
+            <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">EM CONTA</div>
             <div style="font-size: 2rem; font-weight: bold;">{formatar_moeda_br(total_em_conta)}</div>
         </div>
         """, unsafe_allow_html=True)
@@ -93,7 +93,7 @@ def tab_resumo():
             color: white; padding: 30px; border-radius: 12px; text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         ">
-            <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">⏳ A RECEBER</div>
+            <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">A RECEBER</div>
             <div style="font-size: 2rem; font-weight: bold;">{formatar_moeda_br(total_a_receber)}</div>
         </div>
         """, unsafe_allow_html=True)
@@ -105,14 +105,14 @@ def tab_resumo():
             color: white; padding: 30px; border-radius: 12px; text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         ">
-            <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">📊 TOTAL</div>
+            <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">TOTAL</div>
             <div style="font-size: 2rem; font-weight: bold;">{formatar_moeda_br(total_geral)}</div>
         </div>
         """, unsafe_allow_html=True)
 
     # ==================== DETALHAMENTO POR GATEWAY ====================
     st.markdown("---")
-    st.markdown("## 🏦 Detalhamento por Gateway")
+    st.markdown("## Detalhamento por Gateway")
 
     for gateway in dados_gateways:
         st.markdown(f"""
@@ -143,7 +143,7 @@ def tab_resumo():
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
                 <div style="background: #f9fafb; padding: 15px; border-radius: 8px;">
                     <div style="font-size: 0.75rem; color: #6b7280; text-transform: uppercase; margin-bottom: 5px;">
-                        💰 Em Conta
+                        Em Conta
                     </div>
                     <div style="font-size: 1.25rem; font-weight: bold; color: #10b981;">
                         {formatar_moeda_br(gateway['Em Conta'])}
@@ -151,7 +151,7 @@ def tab_resumo():
                 </div>
                 <div style="background: #f9fafb; padding: 15px; border-radius: 8px;">
                     <div style="font-size: 0.75rem; color: #6b7280; text-transform: uppercase; margin-bottom: 5px;">
-                        ⏳ A Receber
+                        A Receber
                     </div>
                     <div style="font-size: 1.25rem; font-weight: bold; color: #f59e0b;">
                         {formatar_moeda_br(gateway['A Receber'])}
@@ -163,7 +163,7 @@ def tab_resumo():
 
     # ==================== DISTRIBUIÇÃO ====================
     st.markdown("---")
-    st.markdown("## 📊 Distribuição dos Recursos")
+    st.markdown("## Distribuição dos Recursos")
 
     # Tabela resumida
     df_tabela = pd.DataFrame(dados_gateways)
@@ -182,43 +182,43 @@ def tab_resumo():
 
     # Observações
     st.markdown("---")
-    st.markdown("### 📝 Observações")
+    st.markdown("### Observações")
 
     col1, col2 = st.columns(2)
 
     with col1:
         st.info("""
-        **🟢 Liquidez Imediata:**
-        - Total em conta: R$ 495.330,60
+        **Liquidez Imediata:**
+        - Total em conta: R$ 465.330,60
         - Disponível para uso imediato
         """)
 
     with col2:
         st.warning("""
-        **⏳ A Receber:**
+        **A Receber:**
         - Total a receber: R$ 231.736,87
         - Principais: Asaas (R$ 128.231) e B2B (R$ 100.000)
         """)
 
 def tab_analise_temporal():
     """Tab de análise temporal"""
-    st.markdown("### 📈 Análise Temporal do Fluxo de Caixa")
+    st.markdown("### Análise Temporal do Fluxo de Caixa")
 
-    st.info("🔄 **Funcionalidade em desenvolvimento** - Será implementada com histórico de movimentações")
+    st.info("**Funcionalidade em desenvolvimento** - Será implementada com histórico de movimentações")
 
     st.markdown("""
     **Esta seção incluirá:**
-    - 📊 Gráfico de evolução do saldo ao longo do tempo
-    - 💹 Análise de entradas e saídas mensais
-    - 📉 Tendências e padrões de fluxo
-    - 🔍 Filtros por período e gateway
+    - Gráfico de evolução do saldo ao longo do tempo
+    - Análise de entradas e saídas mensais
+    - Tendências e padrões de fluxo
+    - Filtros por período e gateway
     """)
 
 def tab_projecoes():
     """Tab de projeções baseadas na Matriz Financeira"""
     from datetime import datetime
 
-    st.markdown("### 🔮 Projeções de Fluxo de Caixa")
+    st.markdown("### Projeções de Fluxo de Caixa")
 
     try:
         # Carrega a Matriz Financeira
@@ -278,7 +278,7 @@ def tab_projecoes():
             })
 
         # Cards de projeção
-        st.info(f"📅 **Saldo inicial:** {formatar_moeda_br(saldo_inicial)} (Em conta + A receber)")
+        st.info(f"**Saldo inicial:** {formatar_moeda_br(saldo_inicial)} (Em conta + A receber)")
 
         # Divide em 2 linhas de 3 cards
         cores = ['#10b981', '#6366f1', '#8b5cf6', '#f59e0b', '#ef4444', '#06b6d4']
@@ -318,7 +318,7 @@ def tab_projecoes():
 
         # Tabela detalhada
         st.markdown("---")
-        st.markdown("#### 📊 Detalhamento Mensal")
+        st.markdown("#### Detalhamento Mensal")
 
         df_projecao = pd.DataFrame(projecoes)
         df_display = df_projecao[['mes_nome', 'receita', 'custo', 'despesa', 'resultado', 'saldo_projetado']].copy()
@@ -332,7 +332,7 @@ def tab_projecoes():
 
         # Gráficos
         st.markdown("---")
-        st.markdown("#### 📈 Visualização do Crescimento")
+        st.markdown("#### Visualização do Crescimento")
 
         import plotly.graph_objects as go
         from plotly.subplots import make_subplots
@@ -408,10 +408,10 @@ def tab_projecoes():
 
         # Observações
         st.markdown("---")
-        st.markdown("#### 📋 Premissas da Projeção")
+        st.markdown("#### Premissas da Projeção")
         st.success("""
-        ✅ **Projeção baseada em:**
-        - Saldo atual em conta: R$ 495.330,60
+        **Projeção baseada em:**
+        - Saldo atual em conta: R$ 465.330,60
         - Recebíveis confirmados: R$ 231.736,87
         - Receitas projetadas da Matriz Financeira
         - Custos e despesas planejados
@@ -432,16 +432,16 @@ def tab_projecoes():
         """, unsafe_allow_html=True)
 
     except Exception as e:
-        st.error(f"❌ Erro ao carregar projeções: {e}")
+        st.error(f"Erro ao carregar projeções: {e}")
         st.info("Verifique se o arquivo Matriz financeira.xlsx está disponível")
 
 def main_fluxo_caixa():
     """Módulo principal de fluxo de caixa"""
 
-    st.title("💰 Fluxo de Caixa")
+    st.title("Fluxo de Caixa")
 
     # Cria 2 tabs (Análise Temporal oculta)
-    tab1, tab2 = st.tabs(["📊 Resumo", "🔮 Projeções"])
+    tab1, tab2 = st.tabs(["Resumo", "Projeções"])
 
     with tab1:
         tab_resumo()
