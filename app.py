@@ -3000,7 +3000,7 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
     st.info("**Visão resumida**: Despesas agrupadas por categoria. Para ver itens individuais, acesse 'Matriz Realizada'.")
 
 def mostrar_matriz_realizada(df_despesas, df_receitas):
-    """Matriz da Matriz financeira.xlsx - junho a setembro/2025"""
+    """Matriz da Matriz financeira.xlsx - junho a outubro/2025"""
 
     st.header("📊 Realizado")
 
@@ -3010,14 +3010,14 @@ def mostrar_matriz_realizada(df_despesas, df_receitas):
         # Carrega matriz
         df = pd.read_excel('Matriz financeira.xlsx', sheet_name='Matriz Detalhada')
 
-        # Seleciona colunas: Categoria + meses jun-set/2025
+        # Seleciona colunas: Categoria + meses jun-out/2025
         colunas_selecionadas = ['Categoria']
         meses_dict = {}
         colunas_data = []
 
         for col in df.columns:
             if isinstance(col, datetime):  # CORRIGIDO: era pd.Timestamp
-                if col.year == 2025 and 6 <= col.month <= 9:
+                if col.year == 2025 and 6 <= col.month <= 10:
                     colunas_selecionadas.append(col)
                     colunas_data.append(col)
                     meses_dict[col] = col.strftime('%b/%y')
