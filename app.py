@@ -2811,7 +2811,11 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
     total_adquirente = 0
 
     for mes in ['2025-06', '2025-07', '2025-08', '2025-09', '2025-10']:
-        if mes in receitas_por_mes:
+        if mes == '2025-10':
+            tarifa = 5185.88  # Valor real da Matriz para Outubro (3.25%)
+            linha_adquirente.append(formatar_moeda_br(tarifa))
+            total_adquirente += tarifa
+        elif mes in receitas_por_mes:
             tarifa = receitas_por_mes[mes] * 0.025
             linha_adquirente.append(formatar_moeda_br(tarifa))
             total_adquirente += tarifa
@@ -2829,7 +2833,7 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
         '2025-07': 0,           # Não teve
         '2025-08': 0,           # Não teve
         '2025-09': receitas_por_mes['2025-09'] * 0.0333,   # Setembro: 3.33% sobre realizado
-        '2025-10': receitas_por_mes['2025-10'] * 0.0333    # Outubro: 3.33% sobre realizado
+        '2025-10': 13259.89     # Outubro: valor real da Matriz (8.31%)
     }
 
     for mes in ['2025-06', '2025-07', '2025-08', '2025-09', '2025-10']:
@@ -2847,8 +2851,11 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
     total_custos_geral = 0
 
     for mes in ['2025-06', '2025-07', '2025-08', '2025-09', '2025-10']:
-        # Adquirente todos os meses
-        custo_adquirente = receitas_por_mes.get(mes, 0) * 0.025
+        # Adquirente: usa valor real da Matriz para Outubro
+        if mes == '2025-10':
+            custo_adquirente = 5185.88  # Valor real da Matriz (3.25%)
+        else:
+            custo_adquirente = receitas_por_mes.get(mes, 0) * 0.025
         # Antecipação só setembro em diante
         custo_antecipacao = tarifas_antecipacao.get(mes, 0)
 
@@ -2940,7 +2947,10 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
         rec = df_receitas[df_receitas['Data'].dt.strftime('%Y-%m') == mes]['Valor'].sum()
         
         # Calcula TODOS os custos (adquirente + antecipação)
-        custo_adquirente = receitas_por_mes.get(mes, 0) * 0.025  # Todos os meses
+        if mes == '2025-10':
+            custo_adquirente = 5185.88  # Valor real da Matriz para Outubro
+        else:
+            custo_adquirente = receitas_por_mes.get(mes, 0) * 0.025  # Todos os meses
         custo_antecipacao = tarifas_antecipacao.get(mes, 0)      # Só setembro em diante
         custos_total = custo_adquirente + custo_antecipacao
         
@@ -3231,18 +3241,21 @@ def exportar_matriz_excel(df_despesas, df_receitas, tarifas_antecipacao):
             # Tarifa adquirente (todos os meses)
             linha_adquirente = ['Tarifa Adquirente (2.5%)', '']
             for mes in meses_str:
-                tarifa = receitas_por_mes_export.get(mes, 0) * 0.025
+                if mes == '2025-10':
+                    tarifa = 5185.88  # Valor real da Matriz para Outubro
+                else:
+                    tarifa = receitas_por_mes_export.get(mes, 0) * 0.025
                 linha_adquirente.append(tarifa)
             linha_adquirente.append(sum(linha_adquirente[2:]))
             dados_detalhados.append(linha_adquirente)
-            
+
             # Tarifa antecipação (só setembro em diante)
             tarifas_antecipacao_export = {
                 '2025-06': 0,
                 '2025-07': 0,
                 '2025-08': 0,
                 '2025-09': receitas_por_mes_export['2025-09'] * 0.0333,
-                '2025-10': receitas_por_mes_export['2025-10'] * 0.0333
+                '2025-10': 13259.89  # Valor real da Matriz para Outubro (8.31%)
             }
             
             linha_antecip = ['Tarifa Antecipação (3.33%)', '']
