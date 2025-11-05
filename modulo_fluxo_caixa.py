@@ -16,48 +16,48 @@ def formatar_moeda_br(valor):
 
 def tab_resumo():
     """Tab de resumo consolidado"""
-    st.markdown("### Posição Consolidada - Outubro 2025")
-    st.info("📅 **Última atualização:** 04/10/2025")
+    st.markdown("### Posição Consolidada - Novembro 2025")
+    st.info("📅 **Última atualização:** 05/11/2025")
 
     # Dados atualizados
     dados_gateways = [
         {
             'Gateway': 'Asaas',
-            'Em Conta': 199242.36,
-            'A Receber': 180404.30,
-            'Total': 199242.36 + 180404.30,
+            'Em Conta': 189975.30,
+            'A Receber': 128230.56,
+            'Total': 189975.30 + 128230.56,
             'Status': '🟢 Ativo',
             'Cor': '#10b981'
         },
         {
             'Gateway': 'Pagar.me',
-            'Em Conta': 121974.33,
-            'A Receber': 5182.26,
-            'Total': 121974.33 + 5182.26,
+            'Em Conta': 254873.70,
+            'A Receber': 3506.31,
+            'Total': 254873.70 + 3506.31,
             'Status': '🟢 Ativo',
             'Cor': '#3b82f6'
         },
         {
             'Gateway': 'Stripe',
-            'Em Conta': 11992.00,
+            'Em Conta': 6791.40,
             'A Receber': 0.00,
-            'Total': 11992.00,
+            'Total': 6791.40,
             'Status': '🔵 Internacional',
             'Cor': '#8b5cf6'
         },
         {
             'Gateway': 'Cripto',
-            'Em Conta': 31699.20,
+            'Em Conta': 43690.20,
             'A Receber': 0.00,
-            'Total': 31699.20,
+            'Total': 43690.20,
             'Status': '🟡 Cripto',
             'Cor': '#f59e0b'
         },
         {
             'Gateway': 'B2B Corporativo',
             'Em Conta': 0.00,
-            'A Receber': 115000.00,
-            'Total': 115000.00,
+            'A Receber': 100000.00,
+            'Total': 100000.00,
             'Status': '⏳ Aguardando',
             'Cor': '#ef4444'
         }
@@ -189,15 +189,15 @@ def tab_resumo():
     with col1:
         st.info("""
         **🟢 Liquidez Imediata:**
-        - Total em conta: R$ 364.907,89
+        - Total em conta: R$ 495.330,60
         - Disponível para uso imediato
         """)
 
     with col2:
         st.warning("""
         **⏳ A Receber:**
-        - Total a receber: R$ 300.586,56
-        - Principais: B2B (R$ 115.000) e Asaas (R$ 180.404)
+        - Total a receber: R$ 231.736,87
+        - Principais: Asaas (R$ 128.231) e B2B (R$ 100.000)
         """)
 
 def tab_analise_temporal():
@@ -241,7 +241,7 @@ def tab_projecoes():
         linha_resultado = df_matriz[df_matriz['Categoria'] == 'RESULTADO LÍQUIDO']
 
         # Saldo inicial (em conta + a receber)
-        saldo_inicial = 364907.89 + 300586.56  # Total atual
+        saldo_inicial = 495330.60 + 231736.87  # Total atual
 
         # Calcula projeção acumulada
         projecoes = []
@@ -411,8 +411,8 @@ def tab_projecoes():
         st.markdown("#### 📋 Premissas da Projeção")
         st.success("""
         ✅ **Projeção baseada em:**
-        - Saldo atual em conta: R$ 364.907,89
-        - Recebíveis confirmados: R$ 300.586,56
+        - Saldo atual em conta: R$ 495.330,60
+        - Recebíveis confirmados: R$ 231.736,87
         - Receitas projetadas da Matriz Financeira
         - Custos e despesas planejados
         """)

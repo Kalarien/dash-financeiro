@@ -50,15 +50,15 @@ def main_fechamento_mes():
     """Módulo principal de fechamento do mês"""
 
     st.title("📊 Fechamento do Mês")
-    st.markdown("### Análise Completa - Setembro 2025")
+    st.markdown("### Análise Completa - Outubro 2025")
 
     # Header com data
-    st.info("📅 **Última atualização:** 04/10/2025 | **Período:** Setembro 2025 (mês completo)")
+    st.info("📅 **Última atualização:** 05/11/2025 | **Período:** Outubro 2025 (mês completo)")
 
     # ==================== SEÇÃO FATURAMENTO ====================
     st.markdown("---")
     st.markdown("## 📈 Faturamento")
-    st.caption("Vendas realizadas e processadas em Setembro/2025")
+    st.caption("Vendas realizadas e processadas em Outubro/2025")
 
     # Métricas principais de faturamento
     col1, col2, col3, col4 = st.columns(4)
@@ -66,32 +66,32 @@ def main_fechamento_mes():
     with col1:
         st.markdown(criar_metrica_card(
             "Faturamento Total",
-            "R$ 257.074,18",
-            "68 transações + B2B",
+            "R$ 159.565,41",
+            "104 transações B2C",
             "positive"
         ), unsafe_allow_html=True)
 
     with col2:
         st.markdown(criar_metrica_card(
             "Faturamento B2B",
-            "R$ 120.000,00",
-            "Vendas corporativas",
+            "R$ 0,00",
+            "Sem vendas B2B",
             "neutral"
         ), unsafe_allow_html=True)
 
     with col3:
         st.markdown(criar_metrica_card(
             "Faturamento B2C",
-            "R$ 137.074,18",
-            "68 transações",
+            "R$ 159.565,41",
+            "104 transações",
             "positive"
         ), unsafe_allow_html=True)
 
     with col4:
         st.markdown(criar_metrica_card(
-            "Taxa Média B2C",
-            "2,78%",
-            "Sobre vendas B2C",
+            "Ticket Médio",
+            "R$ 1.534,28",
+            "Média por transação",
             "neutral"
         ), unsafe_allow_html=True)
 
@@ -100,40 +100,31 @@ def main_fechamento_mes():
 
     df_faturamento = pd.DataFrame([
         {
-            'Adquirente': 'B2B Corporativo',
-            'Transações': '-',
-            'Faturamento': 120000.00,
-            '%': '46,7%',
-            'Ticket Médio': '-',
-            'Taxa': '-',
-            'Status': '🟢 Empresarial'
-        },
-        {
             'Adquirente': 'Pagar.me',
-            'Transações': '52',
-            'Faturamento': 101901.78,
-            '%': '39,6%',
-            'Ticket Médio': 'R$ 1.959,65',
-            'Taxa': '3,04%',
+            'Transações': '97',
+            'Faturamento': 144576.41,
+            '%': '90,6%',
+            'Ticket Médio': 'R$ 1.490,48',
+            'Taxa': '9,20%',
             'Status': '🟢 Nacional'
         },
         {
-            'Adquirente': 'Stripe',
-            'Transações': '5',
-            'Faturamento': 11992.00,
-            '%': '4,7%',
-            'Ticket Médio': 'R$ 2.398,40',
-            'Taxa': '4,01%',
-            'Status': '🔵 Internacional'
-        },
-        {
             'Adquirente': 'Crypto',
-            'Transações': '11',
-            'Faturamento': 23180.40,
-            '%': '9,0%',
-            'Ticket Médio': 'R$ 2.107,31',
+            'Transações': '6',
+            'Faturamento': 11991.00,
+            '%': '7,5%',
+            'Ticket Médio': 'R$ 1.998,50',
             'Taxa': '~1,00%',
             'Status': '🟡 Cripto'
+        },
+        {
+            'Adquirente': 'Stripe',
+            'Transações': '1',
+            'Faturamento': 2998.00,
+            '%': '1,9%',
+            'Ticket Médio': 'R$ 2.998,00',
+            'Taxa': '~4,00%',
+            'Status': '🔵 Internacional'
         }
     ])
 
@@ -166,32 +157,32 @@ def main_fechamento_mes():
     with col1:
         st.markdown(criar_metrica_card(
             "Total Bruto Recebido",
-            "R$ 485.718,40",
-            "Incluindo antecipações",
+            "R$ 144.576,41",
+            "Pagar.me gateway",
             "positive"
         ), unsafe_allow_html=True)
 
     with col2:
         st.markdown(criar_metrica_card(
             "Total de Taxas Pagas",
-            "R$ 56.965,19",
-            "11,73% do bruto",
+            "R$ 13.299,11",
+            "9,20% do bruto",
             "negative"
         ), unsafe_allow_html=True)
 
     with col3:
         st.markdown(criar_metrica_card(
             "Valor Líquido",
-            "R$ 428.753,21",
-            "Após todas as taxas",
+            "R$ 122.540,21",
+            "Após taxas e chargebacks",
             "positive"
         ), unsafe_allow_html=True)
 
     with col4:
         st.markdown(criar_metrica_card(
-            "Antecipações",
-            "R$ 256.464,47",
-            "Recebíveis adiantados",
+            "Chargebacks",
+            "R$ 2.157,84",
+            "Contestações",
             "warning"
         ), unsafe_allow_html=True)
 
@@ -200,36 +191,28 @@ def main_fechamento_mes():
 
     df_caixa = pd.DataFrame([
         {
-            'Adquirente': 'Asaas',
-            'Valor Bruto': 332874.07,
-            'Taxas Pagas': 46617.34,
-            'Taxa %': '14,00%',
-            'Valor Líquido': 286256.73,
-            'Tipo': '🟡 Com Antecipação'
-        },
-        {
             'Adquirente': 'Pagar.me',
-            'Valor Bruto': 117671.93,
-            'Taxas Pagas': 9635.62,
-            'Taxa %': '8,19%',
-            'Valor Líquido': 108036.31,
-            'Tipo': '🟡 Com Antecipação'
+            'Valor Bruto': 144576.41,
+            'Taxas Pagas': 13299.11,
+            'Taxa %': '9,20%',
+            'Valor Líquido': 122540.21,
+            'Tipo': '🟢 Confirmado'
         },
         {
             'Adquirente': 'Crypto',
-            'Valor Bruto': 23180.40,
-            'Taxas Pagas': 231.80,
-            'Taxa %': '1,00%',
-            'Valor Líquido': 22948.60,
+            'Valor Bruto': 11991.00,
+            'Taxas Pagas': 119.91,
+            'Taxa %': '~1,00%',
+            'Valor Líquido': 11871.09,
             'Tipo': '🟢 Estimado'
         },
         {
             'Adquirente': 'Stripe',
-            'Valor Bruto': 11992.00,
-            'Taxas Pagas': 480.43,
-            'Taxa %': '4,01%',
-            'Valor Líquido': 11511.57,
-            'Tipo': '🔵 Confirmado'
+            'Valor Bruto': 2998.00,
+            'Taxas Pagas': 119.92,
+            'Taxa %': '~4,00%',
+            'Valor Líquido': 2878.08,
+            'Tipo': '🟢 Estimado'
         }
     ])
 
@@ -251,13 +234,13 @@ def main_fechamento_mes():
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        st.metric("Taxa de Cobrança (Asaas)", "R$ 13.099,41")
+        st.metric("Taxa Adquirente (3.25%)", "R$ 5.185,88")
     with col2:
-        st.metric("Taxa de Antecipação", "R$ 40.815,23")
+        st.metric("Taxa Antecipação (8.31%)", "R$ 8.113,23")
     with col3:
-        st.metric("Taxa de Operação (Pagar.me)", "R$ 2.338,32")
+        st.metric("Chargebacks", "R$ 2.157,84")
     with col4:
-        st.metric("Outras Taxas", "R$ 712,23")
+        st.metric("Gateway (Pagar.me)", "R$ 13.299,11")
 
     # ==================== COMPARATIVO ====================
     st.markdown("---")
@@ -266,39 +249,25 @@ def main_fechamento_mes():
 
     df_comparativo = pd.DataFrame([
         {
-            'Adquirente': 'B2B Corporativo',
-            'Faturamento': 120000.00,
-            'Recebido': 10000.00,
-            'Diferença': -110000.00,
-            'Observação': 'R$ 10k recebido via Pagar.me / R$ 110k a receber'
-        },
-        {
             'Adquirente': 'Pagar.me',
-            'Faturamento': 101901.78,
-            'Recebido': 117671.93,
-            'Diferença': 15770.15,
-            'Observação': 'Parcelas anteriores + R$ 10k B2B'
-        },
-        {
-            'Adquirente': 'Asaas',
-            'Faturamento': 0.00,
-            'Recebido': 332874.07,
-            'Diferença': 332874.07,
-            'Observação': 'Recebimentos de meses anteriores'
-        },
-        {
-            'Adquirente': 'Stripe',
-            'Faturamento': 11992.00,
-            'Recebido': 11992.00,
+            'Faturamento': 144576.41,
+            'Recebido': 144576.41,
             'Diferença': 0.00,
-            'Observação': 'Valores conferem'
+            'Observação': 'Recebimento do mês'
         },
         {
             'Adquirente': 'Crypto',
-            'Faturamento': 23180.40,
-            'Recebido': 23180.40,
-            'Diferença': 0.00,
-            'Observação': 'Valores conferem'
+            'Faturamento': 11991.00,
+            'Recebido': 0.00,
+            'Diferença': -11991.00,
+            'Observação': 'A receber'
+        },
+        {
+            'Adquirente': 'Stripe',
+            'Faturamento': 2998.00,
+            'Recebido': 0.00,
+            'Diferença': -2998.00,
+            'Observação': 'A receber'
         }
     ])
 
@@ -323,7 +292,7 @@ def main_fechamento_mes():
     with col1:
         st.markdown("""
         <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; text-align: center;">
-            <h3 style="margin: 0; font-size: 2rem;">R$ 257.074</h3>
+            <h3 style="margin: 0; font-size: 2rem;">R$ 159.565</h3>
             <p style="margin: 10px 0 0 0; opacity: 0.9;">Faturamento Total</p>
         </div>
         """, unsafe_allow_html=True)
@@ -331,7 +300,7 @@ def main_fechamento_mes():
     with col2:
         st.markdown("""
         <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 30px; border-radius: 12px; text-align: center;">
-            <h3 style="margin: 0; font-size: 2rem;">R$ 485.718</h3>
+            <h3 style="margin: 0; font-size: 2rem;">R$ 144.576</h3>
             <p style="margin: 10px 0 0 0; opacity: 0.9;">Total Recebido</p>
         </div>
         """, unsafe_allow_html=True)
@@ -339,7 +308,7 @@ def main_fechamento_mes():
     with col3:
         st.markdown("""
         <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; padding: 30px; border-radius: 12px; text-align: center;">
-            <h3 style="margin: 0; font-size: 2rem;">R$ 56.965</h3>
+            <h3 style="margin: 0; font-size: 2rem;">R$ 13.299</h3>
             <p style="margin: 10px 0 0 0; opacity: 0.9;">Total de Taxas</p>
         </div>
         """, unsafe_allow_html=True)
@@ -347,7 +316,7 @@ def main_fechamento_mes():
     with col4:
         st.markdown("""
         <div style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: white; padding: 30px; border-radius: 12px; text-align: center;">
-            <h3 style="margin: 0; font-size: 2rem;">R$ 428.753</h3>
+            <h3 style="margin: 0; font-size: 2rem;">R$ 122.540</h3>
             <p style="margin: 10px 0 0 0; opacity: 0.9;">Valor Líquido</p>
         </div>
         """, unsafe_allow_html=True)
