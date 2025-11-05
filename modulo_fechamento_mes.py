@@ -19,19 +19,19 @@ def criar_metrica_card(label, valor, detalhe="", cor="neutral"):
     cores = {
         'positive': {
             'gradient': 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-            'icon': '📈'
+            'icon': '↗'
         },
         'negative': {
             'gradient': 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
-            'icon': '📉'
+            'icon': '↘'
         },
         'neutral': {
             'gradient': 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
-            'icon': '📊'
+            'icon': '='
         },
         'warning': {
             'gradient': 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
-            'icon': '⚠️'
+            'icon': '!'
         }
     }
 
@@ -93,15 +93,15 @@ def criar_metrica_card(label, valor, detalhe="", cor="neutral"):
 def main_fechamento_mes():
     """Módulo principal de fechamento do mês"""
 
-    st.title("📊 Fechamento do Mês")
+    st.title("Fechamento do Mês")
     st.markdown("### Análise Completa - Outubro 2025")
 
     # Header com data
-    st.info("📅 **Última atualização:** 05/11/2025 | **Período:** Outubro 2025 (mês completo)")
+    st.info("**Última atualização:** 05/11/2025 | **Período:** Outubro 2025 (mês completo)")
 
     # ==================== SEÇÃO FATURAMENTO ====================
     st.markdown("---")
-    st.markdown("## 📈 Faturamento")
+    st.markdown("## Faturamento")
     st.caption("Vendas realizadas e processadas em Outubro/2025")
 
     # Métricas principais de faturamento
@@ -150,7 +150,7 @@ def main_fechamento_mes():
             '%': '90,6%',
             'Ticket Médio': 'R$ 1.490,48',
             'Taxa': '9,20%',
-            'Status': '🟢 Nacional'
+            'Status': 'Nacional'
         },
         {
             'Adquirente': 'Crypto',
@@ -159,7 +159,7 @@ def main_fechamento_mes():
             '%': '7,5%',
             'Ticket Médio': 'R$ 1.998,50',
             'Taxa': '~1,00%',
-            'Status': '🟡 Cripto'
+            'Status': 'Cripto'
         },
         {
             'Adquirente': 'Stripe',
@@ -168,7 +168,7 @@ def main_fechamento_mes():
             '%': '1,9%',
             'Ticket Médio': 'R$ 2.998,00',
             'Taxa': '~4,00%',
-            'Status': '🔵 Internacional'
+            'Status': 'Internacional'
         }
     ])
 
@@ -183,7 +183,7 @@ def main_fechamento_mes():
     )
 
     # Distribuição visual do faturamento
-    st.markdown("#### 📊 Distribuição do Faturamento")
+    st.markdown("#### Distribuição do Faturamento")
 
     for idx, row in df_faturamento.iterrows():
         percentual = float(row['%'].replace('%', '').replace(',', '.'))
@@ -192,7 +192,7 @@ def main_fechamento_mes():
 
     # ==================== SEÇÃO CAIXA ====================
     st.markdown("---")
-    st.markdown("## 💰 Fluxo de Caixa")
+    st.markdown("## Fluxo de Caixa")
     st.caption("Valores efetivamente recebidos no extrato bancário")
 
     # Métricas principais de caixa
@@ -240,7 +240,7 @@ def main_fechamento_mes():
             'Taxas Pagas': 13299.11,
             'Taxa %': '9,20%',
             'Valor Líquido': 122540.21,
-            'Tipo': '🟢 Confirmado'
+            'Tipo': 'Confirmado'
         },
         {
             'Adquirente': 'Crypto',
@@ -248,7 +248,7 @@ def main_fechamento_mes():
             'Taxas Pagas': 119.91,
             'Taxa %': '~1,00%',
             'Valor Líquido': 11871.09,
-            'Tipo': '🟢 Estimado'
+            'Tipo': 'Estimado'
         },
         {
             'Adquirente': 'Stripe',
@@ -256,7 +256,7 @@ def main_fechamento_mes():
             'Taxas Pagas': 119.92,
             'Taxa %': '~4,00%',
             'Valor Líquido': 2878.08,
-            'Tipo': '🟢 Estimado'
+            'Tipo': 'Estimado'
         }
     ])
 
@@ -273,7 +273,7 @@ def main_fechamento_mes():
     )
 
     # Composição das taxas
-    st.markdown("#### 💸 Composição das Taxas Pagas")
+    st.markdown("#### Composição das Taxas Pagas")
 
     col1, col2, col3, col4 = st.columns(4)
 
@@ -288,7 +288,7 @@ def main_fechamento_mes():
 
     # ==================== COMPARATIVO ====================
     st.markdown("---")
-    st.markdown("## ⚖️ Faturamento vs Caixa")
+    st.markdown("## Faturamento vs Caixa")
     st.caption("Comparação entre vendas realizadas e valores recebidos")
 
     df_comparativo = pd.DataFrame([
@@ -329,7 +329,7 @@ def main_fechamento_mes():
 
     # ==================== RESUMO EXECUTIVO ====================
     st.markdown("---")
-    st.markdown("## 📋 Resumo Executivo")
+    st.markdown("## Resumo Executivo")
 
     col1, col2, col3, col4 = st.columns(4)
 
