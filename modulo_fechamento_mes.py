@@ -40,12 +40,12 @@ def criar_metrica_card(label, valor, detalhe="", cor="neutral"):
     return f"""
     <div style="
         background: {config['gradient']};
-        border-radius: 16px;
-        padding: 24px;
-        margin-bottom: 15px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        min-height: 140px;
+        min-height: 95px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -54,34 +54,34 @@ def criar_metrica_card(label, valor, detalhe="", cor="neutral"):
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         ">
             <div style="
                 color: rgba(255, 255, 255, 0.9);
-                font-size: 0.875rem;
+                font-size: 0.75rem;
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
                 font-weight: 500;
             ">
                 {label}
             </div>
-            <div style="font-size: 1.5rem; opacity: 0.8;">
+            <div style="font-size: 1.1rem; opacity: 0.7;">
                 {config['icon']}
             </div>
         </div>
         <div>
             <div style="
-                font-size: 2rem;
+                font-size: 1.5rem;
                 font-weight: bold;
                 color: white;
-                margin-bottom: 6px;
+                margin-bottom: 4px;
                 text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             ">
                 {valor}
             </div>
             <div style="
                 color: rgba(255, 255, 255, 0.85);
-                font-size: 0.8125rem;
+                font-size: 0.7rem;
                 font-weight: 400;
             ">
                 {detalhe}

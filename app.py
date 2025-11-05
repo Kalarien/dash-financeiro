@@ -3015,7 +3015,7 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
 def mostrar_matriz_realizada(df_despesas, df_receitas):
     """Matriz da Matriz financeira.xlsx - junho a outubro/2025"""
 
-    st.header("📊 Realizado")
+    st.header("Realizado")
 
     try:
         from datetime import datetime
@@ -3048,7 +3048,7 @@ def mostrar_matriz_realizada(df_despesas, df_receitas):
         total_resultado = total_receitas - total_custos - total_despesas
 
         # ==================== CARDS DE HIGHLIGHTS ====================
-        st.markdown("### 📈 Indicadores Principais - Junho a Outubro 2025")
+        st.markdown("### Indicadores Principais - Junho a Outubro 2025")
 
         col1, col2, col3, col4 = st.columns(4)
 
@@ -3059,7 +3059,7 @@ def mostrar_matriz_realizada(df_despesas, df_receitas):
                 color: white; padding: 25px; border-radius: 12px; text-align: center;
                 box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             ">
-                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">💰 FATURAMENTO</div>
+                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">FATURAMENTO</div>
                 <div style="font-size: 1.75rem; font-weight: bold;">{formatar_moeda_br(total_receitas)}</div>
             </div>
             """, unsafe_allow_html=True)
@@ -3071,7 +3071,7 @@ def mostrar_matriz_realizada(df_despesas, df_receitas):
                 color: white; padding: 25px; border-radius: 12px; text-align: center;
                 box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             ">
-                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">💳 CUSTOS</div>
+                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">CUSTOS</div>
                 <div style="font-size: 1.75rem; font-weight: bold;">{formatar_moeda_br(total_custos)}</div>
             </div>
             """, unsafe_allow_html=True)
@@ -3083,7 +3083,7 @@ def mostrar_matriz_realizada(df_despesas, df_receitas):
                 color: white; padding: 25px; border-radius: 12px; text-align: center;
                 box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             ">
-                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">💸 DESPESAS</div>
+                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">DESPESAS</div>
                 <div style="font-size: 1.75rem; font-weight: bold;">{formatar_moeda_br(total_despesas)}</div>
             </div>
             """, unsafe_allow_html=True)
@@ -3096,7 +3096,7 @@ def mostrar_matriz_realizada(df_despesas, df_receitas):
                 color: white; padding: 25px; border-radius: 12px; text-align: center;
                 box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             ">
-                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">📊 RESULTADO</div>
+                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">RESULTADO</div>
                 <div style="font-size: 1.75rem; font-weight: bold;">{formatar_moeda_br(total_resultado)}</div>
             </div>
             """, unsafe_allow_html=True)
@@ -3104,7 +3104,7 @@ def mostrar_matriz_realizada(df_despesas, df_receitas):
         st.markdown("---")
 
         # ==================== TABELA DETALHADA ====================
-        st.markdown("### 📋 Detalhamento Completo")
+        st.markdown("### Detalhamento Completo")
 
         # Cria DataFrame com apenas essas colunas
         df_realizado = df[colunas_selecionadas].copy()
@@ -3173,12 +3173,12 @@ def mostrar_matriz_realizada(df_despesas, df_receitas):
             height=650
         )
 
-        st.success(f"✅ Matriz financeira carregada - {len(df_realizado)} linhas | Jun a Set/2025")
+        st.success(f"Matriz financeira carregada - {len(df_realizado)} linhas | Jun a Out/2025")
 
     except FileNotFoundError:
-        st.error("❌ Arquivo 'Matriz financeira.xlsx' não encontrado na pasta!")
+        st.error("Arquivo 'Matriz financeira.xlsx' não encontrado na pasta!")
     except Exception as e:
-        st.error(f"❌ Erro ao carregar: {str(e)}")
+        st.error(f"Erro ao carregar: {str(e)}")
         import traceback
         st.code(traceback.format_exc())
 
