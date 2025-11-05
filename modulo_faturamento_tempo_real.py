@@ -170,9 +170,40 @@ def main_modulo_faturamento_tempo_real():
             """, unsafe_allow_html=True)
 
             # Detalhes do mês
-            st.markdown("**Detalhes:**")
+            st.markdown("""
+            <div style="
+                background: #f8f9fa;
+                border-radius: 8px;
+                padding: 12px 14px;
+                margin-top: 8px;
+                border-left: 3px solid """ + cor + """;
+            ">
+                <div style="
+                    font-size: 0.7rem;
+                    font-weight: 600;
+                    color: #495057;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    margin-bottom: 8px;
+                ">Detalhes</div>
+            """, unsafe_allow_html=True)
+
             for gateway, valor in dados_mes['detalhes'].items():
-                st.markdown(f"• {gateway}: {formatar_moeda_br(valor)}")
+                st.markdown(f"""
+                <div style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 4px 0;
+                    font-size: 0.75rem;
+                    color: #495057;
+                ">
+                    <span style="font-weight: 500;">{gateway}</span>
+                    <span style="font-weight: 600; color: #212529;">{formatar_moeda_br(valor)}</span>
+                </div>
+                """, unsafe_allow_html=True)
+
+            st.markdown("</div>", unsafe_allow_html=True)
 
     # Faturamento por Adquirente
     st.markdown("---")
