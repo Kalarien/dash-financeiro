@@ -3056,11 +3056,11 @@ def mostrar_matriz_realizada(df_despesas, df_receitas):
             st.markdown(f"""
             <div style="
                 background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-                color: white; padding: 25px; border-radius: 12px; text-align: center;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                color: white; padding: 16px; border-radius: 10px; text-align: center;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             ">
-                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">FATURAMENTO</div>
-                <div style="font-size: 1.75rem; font-weight: bold;">{formatar_moeda_br(total_receitas)}</div>
+                <div style="font-size: 0.75rem; opacity: 0.9; margin-bottom: 6px;">FATURAMENTO</div>
+                <div style="font-size: 1.4rem; font-weight: bold;">{formatar_moeda_br(total_receitas)}</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -3068,11 +3068,11 @@ def mostrar_matriz_realizada(df_despesas, df_receitas):
             st.markdown(f"""
             <div style="
                 background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-                color: white; padding: 25px; border-radius: 12px; text-align: center;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                color: white; padding: 16px; border-radius: 10px; text-align: center;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             ">
-                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">CUSTOS</div>
-                <div style="font-size: 1.75rem; font-weight: bold;">{formatar_moeda_br(total_custos)}</div>
+                <div style="font-size: 0.75rem; opacity: 0.9; margin-bottom: 6px;">CUSTOS</div>
+                <div style="font-size: 1.4rem; font-weight: bold;">{formatar_moeda_br(total_custos)}</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -3080,11 +3080,11 @@ def mostrar_matriz_realizada(df_despesas, df_receitas):
             st.markdown(f"""
             <div style="
                 background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-                color: white; padding: 25px; border-radius: 12px; text-align: center;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                color: white; padding: 16px; border-radius: 10px; text-align: center;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             ">
-                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">DESPESAS</div>
-                <div style="font-size: 1.75rem; font-weight: bold;">{formatar_moeda_br(total_despesas)}</div>
+                <div style="font-size: 0.75rem; opacity: 0.9; margin-bottom: 6px;">DESPESAS</div>
+                <div style="font-size: 1.4rem; font-weight: bold;">{formatar_moeda_br(total_despesas)}</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -3093,11 +3093,11 @@ def mostrar_matriz_realizada(df_despesas, df_receitas):
             st.markdown(f"""
             <div style="
                 background: linear-gradient(135deg, {cor_resultado} 0%, {cor_resultado}dd 100%);
-                color: white; padding: 25px; border-radius: 12px; text-align: center;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                color: white; padding: 16px; border-radius: 10px; text-align: center;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             ">
-                <div style="font-size: 0.875rem; opacity: 0.9; margin-bottom: 8px;">RESULTADO</div>
-                <div style="font-size: 1.75rem; font-weight: bold;">{formatar_moeda_br(total_resultado)}</div>
+                <div style="font-size: 0.75rem; opacity: 0.9; margin-bottom: 6px;">RESULTADO</div>
+                <div style="font-size: 1.4rem; font-weight: bold;">{formatar_moeda_br(total_resultado)}</div>
             </div>
             """, unsafe_allow_html=True)
 

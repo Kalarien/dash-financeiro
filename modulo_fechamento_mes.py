@@ -335,33 +335,33 @@ def main_fechamento_mes():
 
     with col1:
         st.markdown("""
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; text-align: center;">
-            <h3 style="margin: 0; font-size: 2rem;">R$ 159.565</h3>
-            <p style="margin: 10px 0 0 0; opacity: 0.9;">Faturamento Total</p>
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 18px; border-radius: 10px; text-align: center;">
+            <h3 style="margin: 0; font-size: 1.5rem;">R$ 159.565</h3>
+            <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 0.85rem;">Faturamento Total</p>
         </div>
         """, unsafe_allow_html=True)
 
     with col2:
         st.markdown("""
-        <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 30px; border-radius: 12px; text-align: center;">
-            <h3 style="margin: 0; font-size: 2rem;">R$ 144.576</h3>
-            <p style="margin: 10px 0 0 0; opacity: 0.9;">Total Recebido</p>
+        <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 18px; border-radius: 10px; text-align: center;">
+            <h3 style="margin: 0; font-size: 1.5rem;">R$ 144.576</h3>
+            <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 0.85rem;">Total Recebido</p>
         </div>
         """, unsafe_allow_html=True)
 
     with col3:
         st.markdown("""
-        <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; padding: 30px; border-radius: 12px; text-align: center;">
-            <h3 style="margin: 0; font-size: 2rem;">R$ 13.299</h3>
-            <p style="margin: 10px 0 0 0; opacity: 0.9;">Total de Taxas</p>
+        <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; padding: 18px; border-radius: 10px; text-align: center;">
+            <h3 style="margin: 0; font-size: 1.5rem;">R$ 13.299</h3>
+            <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 0.85rem;">Total de Taxas</p>
         </div>
         """, unsafe_allow_html=True)
 
     with col4:
         st.markdown("""
-        <div style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: white; padding: 30px; border-radius: 12px; text-align: center;">
-            <h3 style="margin: 0; font-size: 2rem;">R$ 122.540</h3>
-            <p style="margin: 10px 0 0 0; opacity: 0.9;">Valor Líquido</p>
+        <div style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: white; padding: 18px; border-radius: 10px; text-align: center;">
+            <h3 style="margin: 0; font-size: 1.5rem;">R$ 122.540</h3>
+            <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 0.85rem;">Valor Líquido</p>
         </div>
         """, unsafe_allow_html=True)
 

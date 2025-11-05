@@ -125,12 +125,12 @@ def main_modulo_faturamento_tempo_real():
         st.markdown(f"""
         <div style="
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white; padding: 40px; border-radius: 20px;
-            text-align: center; margin: 20px 0;
-            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
+            color: white; padding: 24px; border-radius: 12px;
+            text-align: center; margin: 15px 0;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.25);
         ">
-            <h2 style="margin-bottom: 15px; opacity: 0.9;">Faturamento Total</h2>
-            <div style="font-size: 3em; font-weight: bold; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+            <h2 style="margin-bottom: 10px; opacity: 0.9; font-size: 1.3rem;">Faturamento Total</h2>
+            <div style="font-size: 2.2em; font-weight: bold; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
                 {formatar_moeda_br(dados['total_geral'])}
             </div>
         </div>
@@ -150,20 +150,20 @@ def main_modulo_faturamento_tempo_real():
             st.markdown(f"""
             <div style="
                 background: linear-gradient(135deg, {cor} 0%, {cor}dd 100%);
-                padding: 20px;
-                border-radius: 12px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                padding: 14px;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
                 text-align: center;
-                margin-bottom: 15px;
-                min-height: 120px;
+                margin-bottom: 12px;
+                min-height: 85px;
             ">
-                <div style="font-size: 0.9em; color: white; opacity: 0.9; margin-bottom: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">
+                <div style="font-size: 0.75em; color: white; opacity: 0.9; margin-bottom: 6px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">
                     {mes}
                 </div>
-                <div style="font-size: 1.4em; font-weight: bold; color: white; margin-bottom: 6px;">
+                <div style="font-size: 1.2em; font-weight: bold; color: white; margin-bottom: 4px;">
                     {formatar_moeda_br(dados_mes['total'])}
                 </div>
-                <div style="font-size: 0.85em; color: white; opacity: 0.8;">
+                <div style="font-size: 0.7em; color: white; opacity: 0.8;">
                     {dados_mes['percentual']}% do total
                 </div>
             </div>
@@ -186,20 +186,20 @@ def main_modulo_faturamento_tempo_real():
             st.markdown(f"""
             <div style="
                 background: linear-gradient(135deg, {cor} 0%, {cor}dd 100%);
-                padding: 20px;
-                border-radius: 12px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                padding: 14px;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
                 text-align: center;
-                margin-bottom: 15px;
-                min-height: 120px;
+                margin-bottom: 12px;
+                min-height: 85px;
             ">
-                <div style="font-size: 0.9em; color: white; opacity: 0.9; margin-bottom: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">
+                <div style="font-size: 0.75em; color: white; opacity: 0.9; margin-bottom: 6px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">
                     {gateway}
                 </div>
-                <div style="font-size: 1.4em; font-weight: bold; color: white; margin-bottom: 6px;">
+                <div style="font-size: 1.2em; font-weight: bold; color: white; margin-bottom: 4px;">
                     {formatar_moeda_br(dados_gateway['total'])}
                 </div>
-                <div style="font-size: 0.85em; color: white; opacity: 0.8;">
+                <div style="font-size: 0.7em; color: white; opacity: 0.8;">
                     {dados_gateway['percentual']}% do total
                 </div>
             </div>
