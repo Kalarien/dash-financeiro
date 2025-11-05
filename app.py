@@ -2761,16 +2761,16 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
     dados_matriz = []
     
     # Header
-    meses = ['Jun/25', 'Jul/25', 'Ago/25', 'Set/25']
-    
+    meses = ['Jun/25', 'Jul/25', 'Ago/25', 'Set/25', 'Out/25']
+
     # RECEITAS
-    
+
     # Receitas por status
     for status in ['Realizado', 'Projetado']:
         linha = [f'Receitas {status}', '']
         total_status = 0
-        
-        for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
+
+        for mes in ['2025-06', '2025-07', '2025-08', '2025-09', '2025-10']:
             valor = df_receitas[
                 (df_receitas['Data'].dt.strftime('%Y-%m') == mes) & 
                 (df_receitas['Status'] == status)
@@ -2784,32 +2784,33 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
     # Total receitas
     linha_total_rec = ['TOTAL RECEITAS', '']
     total_geral_rec = 0
-    for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
+    for mes in ['2025-06', '2025-07', '2025-08', '2025-09', '2025-10']:
         valor = df_receitas[df_receitas['Data'].dt.strftime('%Y-%m') == mes]['Valor'].sum()
         linha_total_rec.append(formatar_moeda_br(valor))
         total_geral_rec += valor
     linha_total_rec.append(formatar_moeda_br(total_geral_rec))
     dados_matriz.append(linha_total_rec)
-    
+
     # Separador
-    dados_matriz.append(['', '', '', '', '', ''])
+    dados_matriz.append(['', '', '', '', '', '', ''])
     
     # CUSTOS (Tarifas)
-    dados_matriz.append(['CUSTOS', '', '', '', '', ''])
-    
+    dados_matriz.append(['CUSTOS', '', '', '', '', '', ''])
+
     # Receitas brutas por mês para cálculo das tarifas
     receitas_por_mes = {
         '2025-06': 198198.40,  # Junho bruto
-        '2025-07': 433176.64,  # Julho bruto  
+        '2025-07': 433176.64,  # Julho bruto
         '2025-08': 146682.25,  # Agosto bruto
-        '2025-09': 22278.47    # Setembro bruto (realizado)
+        '2025-09': 22278.47,   # Setembro bruto (realizado)
+        '2025-10': 159565.41   # Outubro bruto
     }
-    
+
     # Tarifa de adquirente (2.5% sobre receitas - TODOS os meses)
     linha_adquirente = ['Tarifa Adquirente (2.5%)', '']
     total_adquirente = 0
-    
-    for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
+
+    for mes in ['2025-06', '2025-07', '2025-08', '2025-09', '2025-10']:
         if mes in receitas_por_mes:
             tarifa = receitas_por_mes[mes] * 0.025
             linha_adquirente.append(formatar_moeda_br(tarifa))
@@ -2822,15 +2823,16 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
     # Tarifa de antecipação (3.33% apenas setembro em diante)
     linha_antecipacao = ['Tarifa Antecipação (3.33%)', '']
     total_antecipacao = 0
-    
+
     tarifas_antecipacao = {
         '2025-06': 0,           # Não teve
         '2025-07': 0,           # Não teve
         '2025-08': 0,           # Não teve
-        '2025-09': receitas_por_mes['2025-09'] * 0.0333  # Setembro: 3.33% sobre realizado
+        '2025-09': receitas_por_mes['2025-09'] * 0.0333,   # Setembro: 3.33% sobre realizado
+        '2025-10': receitas_por_mes['2025-10'] * 0.0333    # Outubro: 3.33% sobre realizado
     }
-    
-    for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
+
+    for mes in ['2025-06', '2025-07', '2025-08', '2025-09', '2025-10']:
         tarifa = tarifas_antecipacao.get(mes, 0)
         if tarifa > 0:
             linha_antecipacao.append(formatar_moeda_br(tarifa))
@@ -2843,36 +2845,36 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
     # Total custos (adquirente + antecipação)
     linha_total_custos = ['TOTAL CUSTOS', '']
     total_custos_geral = 0
-    
-    for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
+
+    for mes in ['2025-06', '2025-07', '2025-08', '2025-09', '2025-10']:
         # Adquirente todos os meses
         custo_adquirente = receitas_por_mes.get(mes, 0) * 0.025
         # Antecipação só setembro em diante
         custo_antecipacao = tarifas_antecipacao.get(mes, 0)
-        
+
         total_mes = custo_adquirente + custo_antecipacao
         linha_total_custos.append(formatar_moeda_br(total_mes))
         total_custos_geral += total_mes
-    
+
     linha_total_custos.append(formatar_moeda_br(total_custos_geral))
     dados_matriz.append(linha_total_custos)
-    
+
     # Separador
-    dados_matriz.append(['', '', '', '', '', ''])
+    dados_matriz.append(['', '', '', '', '', '', ''])
     
     # DESPESAS - RESUMIDAS POR CATEGORIA (SEM DETALHES INDIVIDUAIS)
-    dados_matriz.append(['DESPESAS', '', '', '', '', ''])
-    
+    dados_matriz.append(['DESPESAS', '', '', '', '', '', ''])
+
     # Ordena por categoria
     categorias_ordenadas = ['ADS', 'Impostos', 'Juridico', 'Pro labore', 'Serviços', 'Sistemas']
-    
+
     for categoria in categorias_ordenadas:
         if categoria in df_despesas['Categoria'].values:
             # Apenas a linha da categoria (sem itens individuais)
             linha_categoria = [f'{categoria}', '']
             total_categoria = 0
-            
-            for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
+
+            for mes in ['2025-06', '2025-07', '2025-08', '2025-09', '2025-10']:
                 valor = df_despesas[
                     (df_despesas['Data'].dt.strftime('%Y-%m') == mes) & 
                     (df_despesas['Categoria'] == categoria)
@@ -2893,7 +2895,7 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
         
         if not linha_total_original.empty:
             # Usa os valores corretos da planilha original
-            for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
+            for mes in ['2025-06', '2025-07', '2025-08', '2025-09', '2025-10']:
                 # Encontra a coluna correspondente ao mês
                 colunas_data = [col for col in df_matriz_original.columns if isinstance(col, pd.Timestamp)]
                 coluna_mes = None
@@ -2901,7 +2903,7 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
                     if col.strftime('%Y-%m') == mes:
                         coluna_mes = col
                         break
-                
+
                 if coluna_mes is not None:
                     valor = linha_total_original[coluna_mes].iloc[0]
                     if pd.notna(valor) and valor != 0:
@@ -2913,7 +2915,7 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
                     linha_total_desp.append(formatar_moeda_br(0))
         else:
             # Fallback: calcula manualmente se não encontrar a linha
-            for mes in ['2025-06', '2025-07', '2025-08', '2025-09']:
+            for mes in ['2025-06', '2025-07', '2025-08', '2025-09', '2025-10']:
                 df_mes = df_despesas[df_despesas['Data'].dt.strftime('%Y-%m') == mes]
                 df_principais = df_mes[~df_mes['Categoria'].str.startswith('  ', na=False)]
                 valor = df_principais['Valor'].sum()
@@ -2924,17 +2926,17 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
     except Exception as e:
         st.error(f"Erro ao carregar totais da matriz: {e}")
         # Fallback em caso de erro
-        linha_total_desp = ['TOTAL DESPESAS', ''] + [formatar_moeda_br(0)] * 5
+        linha_total_desp = ['TOTAL DESPESAS', ''] + [formatar_moeda_br(0)] * 6
     dados_matriz.append(linha_total_desp)
-    
+
     # Separador
-    dados_matriz.append(['', '', '', '', '', ''])
-    
+    dados_matriz.append(['', '', '', '', '', '', ''])
+
     # RESULTADO LÍQUIDO (Receitas - Custos - Despesas)
     linha_resultado = ['RESULTADO LÍQUIDO', '']
     resultado_total = 0
-    
-    for i, mes in enumerate(['2025-06', '2025-07', '2025-08', '2025-09']):
+
+    for i, mes in enumerate(['2025-06', '2025-07', '2025-08', '2025-09', '2025-10']):
         rec = df_receitas[df_receitas['Data'].dt.strftime('%Y-%m') == mes]['Valor'].sum()
         
         # Calcula TODOS os custos (adquirente + antecipação)
@@ -2978,9 +2980,9 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
     
     # Cria DataFrame da matriz
     df_matriz = pd.DataFrame(dados_matriz, columns=[
-        'Categoria', 'Status', 'Jun/25', 'Jul/25', 'Ago/25', 'Set/25', 'Total'
+        'Categoria', 'Status', 'Jun/25', 'Jul/25', 'Ago/25', 'Set/25', 'Out/25', 'Total'
     ])
-    
+
     # Exibe a matriz
     st.dataframe(
         df_matriz,
@@ -2993,6 +2995,7 @@ def mostrar_matriz_resumida(df_despesas, df_receitas):
             "Jul/25": st.column_config.TextColumn("Jul/25", width=120),
             "Ago/25": st.column_config.TextColumn("Ago/25", width=120),
             "Set/25": st.column_config.TextColumn("Set/25", width=120),
+            "Out/25": st.column_config.TextColumn("Out/25", width=120),
             "Total": st.column_config.TextColumn("Total", width=140)
         }
     )
@@ -3035,7 +3038,7 @@ def mostrar_matriz_realizada(df_despesas, df_receitas):
         total_resultado = total_receitas - total_custos - total_despesas
 
         # ==================== CARDS DE HIGHLIGHTS ====================
-        st.markdown("### 📈 Indicadores Principais - Junho a Setembro 2025")
+        st.markdown("### 📈 Indicadores Principais - Junho a Outubro 2025")
 
         col1, col2, col3, col4 = st.columns(4)
 
@@ -3180,12 +3183,12 @@ def exportar_matriz_excel(df_despesas, df_receitas, tarifas_antecipacao):
         with pd.ExcelWriter(output, engine='openpyxl') as writer:
             # Preparar dados da matriz detalhada
             dados_detalhados = []
-            
-            meses = ['Jun/25', 'Jul/25', 'Ago/25', 'Set/25']
-            meses_str = ['2025-06', '2025-07', '2025-08', '2025-09']
-            
+
+            meses = ['Jun/25', 'Jul/25', 'Ago/25', 'Set/25', 'Out/25']
+            meses_str = ['2025-06', '2025-07', '2025-08', '2025-09', '2025-10']
+
             # RECEITAS
-            dados_detalhados.append(['RECEITAS', '', '', '', '', ''])
+            dados_detalhados.append(['RECEITAS', '', '', '', '', '', ''])
             
             # Receitas por status
             for status in ['Realizado', 'Projetado']:
@@ -3210,18 +3213,19 @@ def exportar_matriz_excel(df_despesas, df_receitas, tarifas_antecipacao):
                 linha_total_rec.append(valor)
             linha_total_rec.append(sum(linha_total_rec[2:]))
             dados_detalhados.append(linha_total_rec)
-            
-            dados_detalhados.append(['', '', '', '', '', ''])  # Separador
-            
+
+            dados_detalhados.append(['', '', '', '', '', '', ''])  # Separador
+
             # CUSTOS
-            dados_detalhados.append(['CUSTOS', '', '', '', '', ''])
-            
+            dados_detalhados.append(['CUSTOS', '', '', '', '', '', ''])
+
             # Receitas brutas para cálculo
             receitas_por_mes_export = {
                 '2025-06': 198198.40,  # Junho bruto
-                '2025-07': 433176.64,  # Julho bruto  
+                '2025-07': 433176.64,  # Julho bruto
                 '2025-08': 146682.25,  # Agosto bruto
-                '2025-09': 22278.47    # Setembro bruto (realizado)
+                '2025-09': 22278.47,   # Setembro bruto (realizado)
+                '2025-10': 159565.41   # Outubro bruto
             }
             
             # Tarifa adquirente (todos os meses)
@@ -3237,7 +3241,8 @@ def exportar_matriz_excel(df_despesas, df_receitas, tarifas_antecipacao):
                 '2025-06': 0,
                 '2025-07': 0,
                 '2025-08': 0,
-                '2025-09': receitas_por_mes_export['2025-09'] * 0.0333
+                '2025-09': receitas_por_mes_export['2025-09'] * 0.0333,
+                '2025-10': receitas_por_mes_export['2025-10'] * 0.0333
             }
             
             linha_antecip = ['Tarifa Antecipação (3.33%)', '']
@@ -3255,11 +3260,11 @@ def exportar_matriz_excel(df_despesas, df_receitas, tarifas_antecipacao):
                 linha_total_custos_export.append(custo_adq + custo_ant)
             linha_total_custos_export.append(sum(linha_total_custos_export[2:]))
             dados_detalhados.append(linha_total_custos_export)
-            
-            dados_detalhados.append(['', '', '', '', '', ''])  # Separador
-            
+
+            dados_detalhados.append(['', '', '', '', '', '', ''])  # Separador
+
             # DESPESAS DETALHADAS
-            dados_detalhados.append(['DESPESAS', '', '', '', '', ''])
+            dados_detalhados.append(['DESPESAS', '', '', '', '', '', ''])
             
             # Por categoria
             categorias = sorted(df_despesas['Categoria'].unique())
@@ -3331,9 +3336,9 @@ def exportar_matriz_excel(df_despesas, df_receitas, tarifas_antecipacao):
             
             linha_total_desp.append(sum(linha_total_desp[2:]))
             dados_detalhados.append(linha_total_desp)
-            
-            dados_detalhados.append(['', '', '', '', '', ''])  # Separador
-            
+
+            dados_detalhados.append(['', '', '', '', '', '', ''])  # Separador
+
             # RESULTADO LÍQUIDO
             linha_resultado = ['RESULTADO LÍQUIDO', '']
             for i, mes in enumerate(meses_str):
