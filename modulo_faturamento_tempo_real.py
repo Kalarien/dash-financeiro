@@ -12,15 +12,15 @@ from datetime import datetime
 def carregar_dados_faturamento():
     """Carrega dados atualizados do faturamento"""
     try:
-        # Dados atualizados do HTML fornecido
+        # Dados atualizados - Junho a Outubro 2025
         dados = {
-            'total_geral': 1075085.71,
-            'periodo': 'Junho - Setembro 2025 (Setembro completo)',
-            'ultima_atualizacao': '04/10/2025',
+            'total_geral': 1234650.12,
+            'periodo': 'Junho - Outubro 2025 (Outubro completo)',
+            'ultima_atualizacao': '05/11/2025',
             'por_mes': {
                 'Junho': {
                     'total': 208167.52,
-                    'percentual': 20.1,
+                    'percentual': 16.9,
                     'detalhes': {
                         'ASAAS': 158812.42,
                         'CRIPTO': 35378.00,
@@ -29,7 +29,7 @@ def carregar_dados_faturamento():
                 },
                 'Julho': {
                     'total': 437862.80,
-                    'percentual': 42.2,
+                    'percentual': 35.5,
                     'detalhes': {
                         'ASAAS': 353429.90,
                         'CRIPTO': 58540.50,
@@ -38,7 +38,7 @@ def carregar_dados_faturamento():
                 },
                 'Agosto': {
                     'total': 171981.21,
-                    'percentual': 16.6,
+                    'percentual': 13.9,
                     'detalhes': {
                         'ASAAS': 145440.91,
                         'PAGAR.ME': 17246.50,
@@ -48,39 +48,48 @@ def carregar_dados_faturamento():
                 },
                 'Setembro': {
                     'total': 257074.18,
-                    'percentual': 23.9,
+                    'percentual': 20.8,
                     'detalhes': {
                         'B2B': 120000.00,
                         'PAGAR.ME': 101901.78,
                         'CRIPTO': 23180.40,
                         'STRIPE': 11992.00
                     }
+                },
+                'Outubro': {
+                    'total': 159565.41,
+                    'percentual': 12.9,
+                    'detalhes': {
+                        'PAGAR.ME': 144576.41,
+                        'CRIPTO': 11991.00,
+                        'STRIPE': 2998.00
+                    }
                 }
             },
             'por_adquirente': {
                 'ASAAS': {
                     'total': 657683.23,
-                    'percentual': 61.2,
+                    'percentual': 53.3,
                     'cor': '#e74c3c'
                 },
+                'PAGAR.ME': {
+                    'total': 263724.69,
+                    'percentual': 21.4,
+                    'cor': '#3498db'
+                },
                 'CRIPTO': {
-                    'total': 123394.70,
-                    'percentual': 11.5,
+                    'total': 135385.70,
+                    'percentual': 11.0,
                     'cor': '#f39c12'
                 },
                 'B2B': {
                     'total': 120000.00,
-                    'percentual': 11.2,
+                    'percentual': 9.7,
                     'cor': '#2ecc71'
                 },
-                'PAGAR.ME': {
-                    'total': 119148.28,
-                    'percentual': 11.1,
-                    'cor': '#3498db'
-                },
                 'STRIPE': {
-                    'total': 54859.50,
-                    'percentual': 5.1,
+                    'total': 57857.50,
+                    'percentual': 4.7,
                     'cor': '#9b59b6'
                 }
             }
