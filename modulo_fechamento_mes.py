@@ -41,11 +41,11 @@ def criar_metrica_card(label, valor, detalhe="", cor="neutral"):
     <div style="
         background: {config['gradient']};
         border-radius: 12px;
-        padding: 16px;
+        padding: 18px 20px;
         margin-bottom: 12px;
         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        min-height: 95px;
+        min-height: 110px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -53,36 +53,43 @@ def criar_metrica_card(label, valor, detalhe="", cor="neutral"):
         <div style="
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 6px;
+            align-items: center;
+            margin-bottom: 8px;
         ">
             <div style="
-                color: rgba(255, 255, 255, 0.9);
-                font-size: 0.75rem;
+                color: rgba(255, 255, 255, 0.95);
+                font-size: 0.78rem;
                 text-transform: uppercase;
-                letter-spacing: 0.5px;
-                font-weight: 500;
+                letter-spacing: 0.8px;
+                font-weight: 600;
+                line-height: 1.2;
             ">
                 {label}
             </div>
-            <div style="font-size: 1.1rem; opacity: 0.7;">
+            <div style="
+                font-size: 1.2rem;
+                opacity: 0.7;
+                line-height: 1;
+            ">
                 {config['icon']}
             </div>
         </div>
-        <div>
+        <div style="margin-top: auto;">
             <div style="
-                font-size: 1.5rem;
-                font-weight: bold;
+                font-size: 1.6rem;
+                font-weight: 700;
                 color: white;
-                margin-bottom: 4px;
+                margin-bottom: 5px;
                 text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                line-height: 1.1;
             ">
                 {valor}
             </div>
             <div style="
-                color: rgba(255, 255, 255, 0.85);
-                font-size: 0.7rem;
+                color: rgba(255, 255, 255, 0.88);
+                font-size: 0.72rem;
                 font-weight: 400;
+                line-height: 1.3;
             ">
                 {detalhe}
             </div>
@@ -335,33 +342,61 @@ def main_fechamento_mes():
 
     with col1:
         st.markdown("""
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 18px; border-radius: 10px; text-align: center;">
-            <h3 style="margin: 0; font-size: 1.5rem;">R$ 159.565,41</h3>
-            <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 0.85rem;">Faturamento Total</p>
+        <div style="
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 22px 18px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.2);
+        ">
+            <h3 style="margin: 0; font-size: 1.6rem; font-weight: 700; line-height: 1.2;">R$ 159.565,41</h3>
+            <p style="margin: 10px 0 0 0; opacity: 0.92; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.3px;">Faturamento Total</p>
         </div>
         """, unsafe_allow_html=True)
 
     with col2:
         st.markdown("""
-        <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 18px; border-radius: 10px; text-align: center;">
-            <h3 style="margin: 0; font-size: 1.5rem;">R$ 144.576,41</h3>
-            <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 0.85rem;">Total Recebido</p>
+        <div style="
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 22px 18px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(16, 185, 129, 0.2);
+        ">
+            <h3 style="margin: 0; font-size: 1.6rem; font-weight: 700; line-height: 1.2;">R$ 144.576,41</h3>
+            <p style="margin: 10px 0 0 0; opacity: 0.92; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.3px;">Total Recebido</p>
         </div>
         """, unsafe_allow_html=True)
 
     with col3:
         st.markdown("""
-        <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; padding: 18px; border-radius: 10px; text-align: center;">
-            <h3 style="margin: 0; font-size: 1.5rem;">R$ 13.299,11</h3>
-            <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 0.85rem;">Total de Taxas</p>
+        <div style="
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            padding: 22px 18px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(239, 68, 68, 0.2);
+        ">
+            <h3 style="margin: 0; font-size: 1.6rem; font-weight: 700; line-height: 1.2;">R$ 13.299,11</h3>
+            <p style="margin: 10px 0 0 0; opacity: 0.92; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.3px;">Total de Taxas</p>
         </div>
         """, unsafe_allow_html=True)
 
     with col4:
         st.markdown("""
-        <div style="background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); color: white; padding: 18px; border-radius: 10px; text-align: center;">
-            <h3 style="margin: 0; font-size: 1.5rem;">R$ 122.540,21</h3>
-            <p style="margin: 8px 0 0 0; opacity: 0.9; font-size: 0.85rem;">Valor Líquido</p>
+        <div style="
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            padding: 22px 18px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.2);
+        ">
+            <h3 style="margin: 0; font-size: 1.6rem; font-weight: 700; line-height: 1.2;">R$ 122.540,21</h3>
+            <p style="margin: 10px 0 0 0; opacity: 0.92; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.3px;">Valor Líquido</p>
         </div>
         """, unsafe_allow_html=True)
 
